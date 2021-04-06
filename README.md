@@ -27,3 +27,12 @@ The changelog can be found on the [Releases page](https://github.com/brettz9/nut
 [Brett Zamir](http://brett-zamir.me/) and [contributors](https://github.com/brettz9/nutrient-rich/graphs/contributors).
 
 MIT License, see the included [LICENSE-MIT.md](LICENSE-MIT.md) file.
+
+## Data Source
+
+U.S. Department of Agriculture, Agricultural Research Service.
+FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
+
+## See also
+
+- <https://catalog.data.gov/dataset?vocab_category_all=Food+Safety+and+Nutrition>

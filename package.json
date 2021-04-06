@@ -10,10 +10,12 @@
   ],
   "main": "src/index.js",
   "browserslist": [
-    "cover 100%"
+    "last 2 versions, not dead"
   ],
   "scripts": {
-    "start": "srr --port=8003",
+    "rollup": "rollup -c",
+    "watch": "srr --port=8003",
+    "start": "static --port=8003",
     "open": "open-cli http://localhost:8003/src/ && npm start",
     "eslint": "eslint --ext=jd,md,html",
     "lint": "npm run eslint",
@@ -31,10 +33,14 @@
   "engines": {
     "node": ">=10.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "hyperhtml": "^2.34.0",
+    "hyperhtml-element": "^3.14.0"
+  },
   "devDependencies": {
     "@brettz9/eslint-plugin": "^1.0.3",
     "@brettz9/node-static": "^0.1.1",
+    "@rollup/plugin-node-resolve": "^11.2.1",
     "eslint": "^7.23.0",
     "eslint-config-ash-nazg": "29.9.0",
     "eslint-config-standard": "^16.0.2",
@@ -52,6 +58,7 @@
     "eslint-plugin-radar": "^0.2.1",
     "eslint-plugin-unicorn": "^29.0.0",
     "open-cli": "^6.0.1",
+    "rollup": "^2.44.0",
     "serve-reload-replace": "^1.1.10"
   }
 }
