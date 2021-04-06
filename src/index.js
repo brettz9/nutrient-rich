@@ -1,4 +1,30 @@
-import HyperHTMLElement from '../vendor/hyperhtml-element.js';
+import HHE from '../vendor/hyperhtml-element.js';
+
+const Templates = {
+  body () {
+    HHE.bind($('body'))`
+      <input id="api_key">
+      <div id="nutrients"></div>
+    `;
+  },
+  nutrients (nutrients) {
+    HHE.bind($('#nutrients'))`
+      <label>
+        <b>Nutrients</b>
+        <select>
+          ${
+  Object.entries(nutrients).sort(([nameA], [nameB]) => {
+    return nameA < nameB ? -1 : (nameA > nameB ? 1 : 0);
+  }).map(([nameWithUnit, id]) => {
+    return `<option value="${id}"${
+      /* Amino Acids */ id === 2042 ? ' selected="selected"' : ''
+    }>${nameWithUnit}</option>`;
+  })}
+        </select>
+      </label>
+    `;
+  }
+};
 
 /*
 /food/{fdcId}     GET     one food item
@@ -8,6 +34,8 @@ import HyperHTMLElement from '../vendor/hyperhtml-element.js';
  */
 const $ = (sel) => document.querySelector(sel);
 const baseURL = 'https://api.nal.usda.gov/fdc/v1/';
+
+Templates.body();
 
 const apiKey = $('#api_key');
 
@@ -28,23 +56,7 @@ setup();
 async function setup () {
   const nutrients = await getNutrients();
 
-  const render = HyperHTMLElement.bind($('#nutrients'));
-  render`
-    <label>
-      <b>Nutrients</b>
-      <select>
-        ${
-  Object.entries(nutrients).sort(([nameA], [nameB]) => {
-    return nameA < nameB ? -1 : (nameA > nameB ? 1 : 0);
-  }).map(([nameWithUnit, id]) => {
-    return `<option value="${id}"${
-      /* Amino Acids */ id === 2042 ? ' selected="selected"' : ''
-    }>${nameWithUnit}</option>`;
-  })}
-      </select>
-    </label>
-  `;
-  // Todo: List nutrients (with units)
+  Templates.nutrients(nutrients);
 
   // Todo: Supply nutrients to API for shortening food result
   // eslint-disable-next-line no-console -- Testing
