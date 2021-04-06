@@ -1,8 +1,10 @@
 # nutrient-rich
 
-```
+***This project is not yet complete.***
+
+<!-- ```
 npm i nutrient-rich
-```
+``` -->
 
 ## Ideas
 
