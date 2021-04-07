@@ -4,7 +4,7 @@ import HHE from '../vendor/hyperhtml-element.js';
 const Templates = {
   body (render) {
     render`
-      <label>API Key: <input id="api_key"></label><br><br>
+      <label>API Key: <input type="password" id="api_key"></label><br><br>
 
       <label>Amount of ingredient needed:
         <input id="ingredient-needed"></label><br><br>
