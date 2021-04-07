@@ -29,14 +29,17 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. General fixes to input box setting, e.g., avoiding N/A?
-    (and need for unit comparison?); reason for non-matching names?;
+1. General fixes to input box setting (reason for non-matching names?),
+    (and need for unit comparison?);
     have reactive property to update unit next to
     "Amount of ingredient needed" (and table inputs?) based on menu selection
 1. Option to predownload all foods and/or nutrients and put in storage
 1. Option to filter inputs by non-zero ones (and sort at least by potency,
     i.e., needing a lower amount), though might also prefer non-decimal ones
     or closer to "1"
+
+## Medium-priority to-dos
+
 1. Might use custom elements features of hyperHTMLElement for readability
 1. Use `rank` if useful (a matter of proportional power?)
 
