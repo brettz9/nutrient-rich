@@ -1,74 +1,7 @@
 import {$, template} from './templates.js';
+import {roundDigits} from './utils.js';
 
-const roundDigits = (num, maxNumDecimals = 4) => {
-  const factor = 10 ** maxNumDecimals;
-  return Math.round((num + Number.EPSILON) * factor) / factor;
-};
 const baseURL = 'https://api.nal.usda.gov/fdc/v1/';
-
-template('body');
-
-const apiKey = $('#api_key');
-
-if (!apiKey.value) {
-  apiKey.value = localStorage.getItem('api-key');
-}
-apiKey.addEventListener('change', (e) => {
-  // eslint-disable-next-line no-console -- Debugging
-  console.log('new value', e.target.value);
-  localStorage.setItem('api-key', e.target.value);
-  setup();
-});
-setup();
-
-/**
- * @returns {Promise<void>}
- */
-async function setup () {
-  const nutrients = await getNutrients();
-  // eslint-disable-next-line no-console -- Debugging
-  console.log('nutrients', nutrients);
-
-  template('#nutrients', nutrients);
-
-  const {foods, foodInfo} = await getFoods();
-  // eslint-disable-next-line no-console -- Debugging
-  console.log('foods', foods);
-
-  template('#foods', foods);
-
-  $('#nutrient-choice').addEventListener('change', (e) => {
-    // const uName = e.target.getAttribute('data-unitName');
-    const nme = e.target.selectedOptions[0].getAttribute('data-name');
-    const totalNeeded = $('#ingredient-needed').value;
-
-    foodInfo.forEach(({fdcId, foodNutrients}) => {
-      foodNutrients.some(({amount, name, unitName}) => {
-        if (nme === name) {
-          // eslint-disable-next-line no-console -- Debugging
-          console.log(
-            'nme === name', nme === name, nme, name, unitName,
-            totalNeeded, amount
-          );
-          $(`#unit_${fdcId}`).value = unitName;
-
-          const amountFactor = totalNeeded / amount;
-
-          $(`#amount_${fdcId}`).value = roundDigits(amount);
-          $(`#amountPerUnit_${fdcId}`).value =
-            amountFactor === Number.POSITIVE_INFINITY
-              ? 'N/A'
-              : roundDigits(amountFactor);
-          return true;
-        }
-        return false;
-      });
-    });
-  });
-
-  // Todo: Supply nutrients to API for shortening specific food result or
-  //   just cache?
-}
 
 /**
  * @returns {Promise<FoodsAndJSON>}
@@ -128,3 +61,68 @@ async function getNutrients () {
 
   return nutrients;
 }
+
+/**
+ * @returns {Promise<void>}
+ */
+async function setup () {
+  const nutrients = await getNutrients();
+  // eslint-disable-next-line no-console -- Debugging
+  console.log('nutrients', nutrients);
+
+  template('#nutrients', nutrients);
+
+  const {foods, foodInfo} = await getFoods();
+  // eslint-disable-next-line no-console -- Debugging
+  console.log('foods', foods);
+
+  template('#foods', foods);
+
+  $('#nutrient-choice').addEventListener('change', (e) => {
+    // const uName = e.target.getAttribute('data-unitName');
+    const nme = e.target.selectedOptions[0].getAttribute('data-name');
+    const totalNeeded = $('#ingredient-needed').value;
+
+    foodInfo.forEach(({fdcId, foodNutrients}) => {
+      foodNutrients.some(({amount, name, unitName}) => {
+        if (nme === name) {
+          // eslint-disable-next-line no-console -- Debugging
+          console.log(
+            'nme === name', nme === name, nme, name, unitName,
+            totalNeeded, amount
+          );
+          $(`#unit_${fdcId}`).value = unitName;
+
+          const amountFactor = totalNeeded / amount;
+
+          $(`#amount_${fdcId}`).value = roundDigits(amount);
+          $(`#amountPerUnit_${fdcId}`).value =
+            amountFactor === Number.POSITIVE_INFINITY
+              ? 'N/A'
+              : roundDigits(amountFactor);
+          return true;
+        }
+        return false;
+      });
+    });
+  });
+
+  // Todo: Supply nutrients to API for shortening specific food result or
+  //   just cache?
+}
+
+// BEGIN PAGE
+
+template('body');
+
+const apiKey = $('#api_key');
+if (!apiKey.value) {
+  apiKey.value = localStorage.getItem('api-key');
+}
+apiKey.addEventListener('change', (e) => {
+  // eslint-disable-next-line no-console -- Debugging
+  console.log('new value', e.target.value);
+  localStorage.setItem('api-key', e.target.value);
+  setup();
+});
+setup();
