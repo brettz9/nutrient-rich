@@ -6,18 +6,6 @@
 npm i nutrient-rich
 ``` -->
 
-## Ideas
-
-3D world to go shopping and show foods and their amounts that can make
-a deficiency.
-
-Like to get (or lose) so many grams of Vitamin C, you can take 10 oranges,
-5 lemons, 20 watermeons, and the opposite if drinking 2 Coca Colas,
-smoking 5 cigarrettes, etc.
-
-I am thinking the user could choose to pile them so they look to scale
-(easier to judge for shopping) or an option to just show the numbers.
-
 ## Changelog
 
 The changelog can be found on the
@@ -51,3 +39,15 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
     or closer to "1"
 1. Might use custom elements features of hyperHTMLElement for readability
 1. Use `rank` if useful (a matter of proportional power?)
+
+## Ideas for longer term
+
+3D world to go shopping and show foods and their amounts that can make
+a deficiency.
+
+Like to get (or lose) so many grams of Vitamin C, you can take 10 oranges,
+5 lemons, 20 watermeons, and the opposite if drinking 2 Coca Colas,
+smoking 5 cigarrettes, etc.
+
+I am thinking the user could choose to pile them so they look to scale
+(easier to judge for shopping) or an option to just show the numbers.
