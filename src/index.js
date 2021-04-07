@@ -102,6 +102,7 @@ async function setup () {
     foodInfo.forEach(({fdcId, foodNutrients}) => {
       foodNutrients.some(({amount, name, unitName}) => {
         if (nme === name) {
+          // eslint-disable-next-line no-console -- Debugging
           console.log(
             'nme === name', nme === name, nme, name, unitName,
             totalNeeded, amount
