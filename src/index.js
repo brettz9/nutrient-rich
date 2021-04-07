@@ -1,8 +1,8 @@
 import HHE from '../vendor/hyperhtml-element.js';
 
 const Templates = {
-  body () {
-    HHE.bind($('body'))`
+  body (render) {
+    render`
       <label>API Key: <input id="api_key"></label><br><br>
 
       <label>Amount of ingredient needed:
@@ -12,8 +12,8 @@ const Templates = {
       <div id="foods"></div>
     `;
   },
-  nutrients (nutrients) {
-    HHE.bind($('#nutrients'))`
+  '#nutrients' (render, nutrients) {
+    render`
       <label>
         <b>Nutrients</b>
         <select id="nutrient-choice">
@@ -31,8 +31,8 @@ const Templates = {
       </label>
     `;
   },
-  foods (foods) {
-    HHE.bind($('#foods'))`
+  '#foods' (render, foods) {
+    render`
       <b>Foods</b>
       <table>
         <tr><th>Food</th>
@@ -52,9 +52,13 @@ const Templates = {
 };
 
 const $ = (sel) => document.querySelector(sel);
+const template = (sel, ...args) => {
+  const render = HHE.bind($(sel));
+  Templates[sel](render, ...args);
+};
 const baseURL = 'https://api.nal.usda.gov/fdc/v1/';
 
-Templates.body();
+template('body');
 
 const apiKey = $('#api_key');
 
@@ -77,13 +81,13 @@ async function setup () {
   // eslint-disable-next-line no-console -- Debugging
   console.log('nutrients', nutrients);
 
-  Templates.nutrients(nutrients);
+  template('#nutrients', nutrients);
 
   const {foods, foodInfo} = await getFoods();
   // eslint-disable-next-line no-console -- Debugging
   console.log('foods', foods);
 
-  Templates.foods(foods);
+  template('#foods', foods);
 
   $('#nutrient-choice').addEventListener('change', (e) => {
     // const uName = e.target.getAttribute('data-unitName');

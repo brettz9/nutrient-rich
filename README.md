@@ -20,11 +20,13 @@ I am thinking the user could choose to pile them so they look to scale
 
 ## Changelog
 
-The changelog can be found on the [Releases page](https://github.com/brettz9/nutrient-rich/releases).
+The changelog can be found on the
+[Releases page](https://github.com/brettz9/nutrient-rich/releases).
 
 ## Authors and license
 
-[Brett Zamir](http://brett-zamir.me/) and [contributors](https://github.com/brettz9/nutrient-rich/graphs/contributors).
+[Brett Zamir](http://brett-zamir.me/) and
+[contributors](https://github.com/brettz9/nutrient-rich/graphs/contributors).
 
 MIT License, see the included [LICENSE-MIT.md](LICENSE-MIT.md) file.
 
@@ -36,3 +38,16 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 ## See also
 
 - <https://catalog.data.gov/dataset?vocab_category_all=Food+Safety+and+Nutrition>
+
+## To-dos
+
+1. General fixes to input box setting, e.g., avoiding 0/Infinity
+    (and need for unit comparison?); round numbers; reason for
+    non-matching names?; have reactive property to update unit next to
+    "Amount of ingredient needed" (and table inputs?) based on menu selection
+1. Option to predownload all foods and/or nutrients and put in storage
+1. Option to filter inputs by non-zero ones (and sort at least by potency,
+    i.e., needing a lower amount), though might also prefer non-decimal ones
+    or closer to "1"
+1. Might use custom elements features of hyperHTMLElement for readability
+1. Use `rank` if useful (a matter of proportional power?)
