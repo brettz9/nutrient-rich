@@ -4,8 +4,8 @@ const $ = (sel) => document.querySelector(sel);
 
 // Better separation by simplifying the supplied objects before adding
 const Templates = {
-  body (render) {
-    render`
+  body (html) {
+    html`
       <label>API Key: <input type="password" id="api_key"></label><br><br>
 
       <label>Amount of ingredient needed:
@@ -15,8 +15,8 @@ const Templates = {
       <div id="foods"></div>
     `;
   },
-  '#nutrients' (render, nutrients) {
-    render`
+  '#nutrients' (html, nutrients) {
+    html`
       <label>
         <b>Nutrients</b>
         <select id="nutrient-choice">
@@ -34,8 +34,8 @@ const Templates = {
       </label>
     `;
   },
-  '#foods' (render, foods) {
-    render`
+  '#foods' (html, foods) {
+    html`
       <b>Foods</b>
       <table>
         <tr><th>Food</th>
@@ -45,8 +45,8 @@ const Templates = {
   Object.entries(foods).map(([desc, id]) => {
     // 100 GRAND Bar (early in list); id=1104067
     return `<tr><td><label for="amount_${id}">${desc}</label></td>` +
-            `<td><input id="amount_${id}"> <span id="unit_${id}"></span></td>` +
-            `<td><input id="amountPerUnit_${id}"></td></tr>`;
+      `<td><input id="amount_${id}"> <span id="unit_${id}"></span></td>` +
+      `<td><input id="amountPerUnit_${id}"></td></tr>`;
   })
 }
       </table>

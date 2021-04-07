@@ -9,7 +9,7 @@
  */
 
 /**
- * Has more proeprties, but these are all that concern for now.
+ * Has more properties, but these are all that concern for now.
  * @typedef {PlainObject} FoodInfo
  * @property {Integer} fdcId
  * @property {string} description
