@@ -1,62 +1,5 @@
-import HHE from '../vendor/hyperhtml-element.js';
+import {$, template} from './templates.js';
 
-// Better separation by simplifying the supplied objects before adding
-const Templates = {
-  body (render) {
-    render`
-      <label>API Key: <input type="password" id="api_key"></label><br><br>
-
-      <label>Amount of ingredient needed:
-        <input id="ingredient-needed"></label><br><br>
-
-      <div id="nutrients"></div>
-      <div id="foods"></div>
-    `;
-  },
-  '#nutrients' (render, nutrients) {
-    render`
-      <label>
-        <b>Nutrients</b>
-        <select id="nutrient-choice">
-          ${
-  Object.entries(nutrients).sort(([, {name: nameA}], [, {name: nameB}]) => {
-    return nameA < nameB ? -1 : (nameA > nameB ? 1 : 0);
-  }).map(([id, {name, unitName}]) => {
-    return `<option data-name="${name}" ` +
-              ` data-unitName="${unitName}" value="${id}"${
-                // Amino Acids (early in list after stranger DHA names)
-                id === 2042 ? ' selected="selected"' : ''
-              }>${`${name} (${unitName})`}</option>`;
-  })}
-        </select>
-      </label>
-    `;
-  },
-  '#foods' (render, foods) {
-    render`
-      <b>Foods</b>
-      <table>
-        <tr><th>Food</th>
-          <th>Amount of food required</th>
-          <th>Amount per unit</th></tr>
-        ${
-  Object.entries(foods).map(([desc, id]) => {
-    // 100 GRAND Bar (early in list); id=1104067
-    return `<tr><td><label for="amount_${id}">${desc}</label></td>` +
-            `<td><input id="amount_${id}"> <span id="unit_${id}"></span></td>` +
-            `<td><input id="amountPerUnit_${id}"></td></tr>`;
-  })
-}
-      </table>
-    `;
-  }
-};
-
-const $ = (sel) => document.querySelector(sel);
-const template = (sel, ...args) => {
-  const render = HHE.bind($(sel));
-  Templates[sel](render, ...args);
-};
 const roundDigits = (num, maxNumDecimals = 4) => {
   const factor = 10 ** maxNumDecimals;
   return Math.round((num + Number.EPSILON) * factor) / factor;
@@ -128,32 +71,6 @@ async function setup () {
 }
 
 /**
- * @typedef {PlainObject} FoodNutrient
- * @property {Float} amount
- * @property {string} name
- * @property {string} number
- * @property {string} unitName
- */
-
-/**
- * Has more proeprties, but these are all that concern for now.
- * @typedef {PlainObject} FoodInfo
- * @property {Integer} fdcId
- * @property {string} description
- * @property {FoodNutrient[]} foodNutrients
- */
-
-/**
-* @typedef {Object<string,string>} Foods
-*/
-
-/**
-* @typedef {PlainObject} FoodsAndJSON
-* @property {FoodInfo} foodInfo
-* @property {Foods} foods
-*/
-
-/**
  * @returns {Promise<FoodsAndJSON>}
  */
 async function getFoods () {
@@ -180,10 +97,6 @@ async function getFoods () {
 // fdcId=1104086;
 // format=abridged|full (full is default)
 // nutrients=1,2,3,...25 (requesting on these nutrient IDs in results)
-
-/**
-* @typedef {PlainObject<string,string>} Nutrients
-*/
 
 /**
  * @returns {Promise<Nutrients>}
