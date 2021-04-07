@@ -41,9 +41,9 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. General fixes to input box setting, e.g., avoiding 0/Infinity
-    (and need for unit comparison?); round numbers; reason for
-    non-matching names?; have reactive property to update unit next to
+1. General fixes to input box setting, e.g., avoiding N/A?
+    (and need for unit comparison?); reason for non-matching names?;
+    have reactive property to update unit next to
     "Amount of ingredient needed" (and table inputs?) based on menu selection
 1. Option to predownload all foods and/or nutrients and put in storage
 1. Option to filter inputs by non-zero ones (and sort at least by potency,

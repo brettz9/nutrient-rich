@@ -8,6 +8,7 @@ module.exports = {
     polyfills: [
       'document.querySelector',
       'fetch',
+      'Number.EPSILON',
       'Object.entries'
     ]
   },

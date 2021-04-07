@@ -1,5 +1,6 @@
 import HHE from '../vendor/hyperhtml-element.js';
 
+// Better separation by simplifying the supplied objects before adding
 const Templates = {
   body (render) {
     render`
@@ -56,6 +57,10 @@ const template = (sel, ...args) => {
   const render = HHE.bind($(sel));
   Templates[sel](render, ...args);
 };
+const roundDigits = (num, maxNumDecimals = 4) => {
+  const factor = 10 ** maxNumDecimals;
+  return Math.round((num + Number.EPSILON) * factor) / factor;
+};
 const baseURL = 'https://api.nal.usda.gov/fdc/v1/';
 
 template('body');
@@ -97,13 +102,19 @@ async function setup () {
     foodInfo.forEach(({fdcId, foodNutrients}) => {
       foodNutrients.some(({amount, name, unitName}) => {
         if (nme === name) {
-          console.log('nme === name', nme === name, nme, name, unitName, totalNeeded, amount);
+          console.log(
+            'nme === name', nme === name, nme, name, unitName,
+            totalNeeded, amount
+          );
           $(`#unit_${fdcId}`).value = unitName;
 
           const amountFactor = totalNeeded / amount;
 
-          $(`#amount_${fdcId}`).value = amount;
-          $(`#amountPerUnit_${fdcId}`).value = amountFactor;
+          $(`#amount_${fdcId}`).value = roundDigits(amount);
+          $(`#amountPerUnit_${fdcId}`).value =
+            amountFactor === Number.POSITIVE_INFINITY
+              ? 'N/A'
+              : roundDigits(amountFactor);
           return true;
         }
         return false;
