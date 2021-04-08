@@ -6,7 +6,11 @@ const $ = (sel) => document.querySelector(sel);
 const Templates = {
   body (html) {
     html`
-      <label>API Key: <input type="password" id="api_key"></label><br><br>
+      <fieldset>
+        <legend>Preferences</legend>
+        <label>API Key: <input type="password" id="api_key"></label><br><br>
+      </fieldset>
+      <br>
 
       <label>Amount of ingredient needed:
         <input id="ingredient-needed"></label><br><br>

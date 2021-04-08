@@ -29,10 +29,11 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. General fixes to input box setting (reason for non-matching names?),
-    (and need for unit comparison?);
-    have reactive property to update unit next to
-    "Amount of ingredient needed" (and table inputs?) based on menu selection
+1. General fixes to input box setting
+    1. Have reactive property to update unit next to "Amount of ingredient
+        needed" (and table inputs?) based on menu selection
+    1. Reason for non-matching names?
+    1. Need for unit comparison?
 1. Option to predownload all foods and/or nutrients and put in storage
 1. Option to filter inputs by non-zero ones (and sort at least by potency,
     i.e., needing a lower amount), though might also prefer non-decimal ones
