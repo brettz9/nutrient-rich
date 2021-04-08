@@ -1,31 +1,42 @@
 /* eslint-disable import/unambiguous -- Typedefs only */
 
 /**
+ * `g`, etc.
+ * @typedef {string} Unit
+ */
+
+/**
+ * @typedef {Integer} FDCID
+ */
+
+/**
+ * @typedef {string} NutrientName
+ */
+
+/**
  * @typedef {PlainObject} FoodNutrient
  * @property {Float} amount
- * @property {string} name
+ * @property {NutrientName} name
  * @property {string} number
- * @property {string} unitName
+ * @property {Unit} unitName
  */
 
 /**
  * Has more properties, but these are all that concern for now.
  * @typedef {PlainObject} FoodInfo
- * @property {Integer} fdcId
+ * @property {FDCID} fdcId
  * @property {string} description
  * @property {FoodNutrient[]} foodNutrients
  */
 
 /**
-* @typedef {Object<string,string>} Foods
-*/
-
-/**
-* @typedef {PlainObject} FoodsAndJSON
-* @property {FoodInfo} foodInfo
-* @property {Foods} foods
-*/
-
-/**
  * @typedef {PlainObject<string,string>} Nutrients
+ */
+
+/**
+ * @typedef {string} Ingredient
+ */
+
+/**
+ * @typedef {string} ApiKey
  */
