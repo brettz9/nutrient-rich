@@ -34,7 +34,8 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
         needed" (and table inputs?) based on menu selection
     1. Reason for non-matching names?
     1. Need for unit comparison?
-1. Option to predownload all foods and/or nutrients and put in storage
+1. Option to predownload all foods and/or nutrients and put in storage (though
+    supply nutrients needed if allowing some live, e.g. against another API?)
 1. Option to filter inputs by non-zero ones (and sort at least by potency,
     i.e., needing a lower amount), though might also prefer non-decimal ones
     or closer to "1"
