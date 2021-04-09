@@ -47,7 +47,7 @@ class NutrientRichFoods extends HyperHTMLElement {
     return {
       apiKey: '',
       totalNeeded: '',
-      chosenNutrientName: '',
+      chosenNutrientName: 'Amino acids',
       foodInfo: this.foodInfo || []
     };
   }
