@@ -29,7 +29,7 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. **Pagination** to see (or grab?) more foods
+1. **Pagination** to see (or grab?) more foods; tie in with **caching**.
 1. Option to **filter** inputs by non-zero ones and **sort** at least by
     potency, i.e., needing a lower amount, though might also prefer
     non-decimal ones or closer to "1"
