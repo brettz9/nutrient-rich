@@ -63,12 +63,26 @@ class NutrientRichPreferences extends HyperHTMLElement {
   }
 
   /**
+   * @param {Event} e
+   * @returns {void}
+   */
+  togglePreferences (e) {
+    const fieldset = e.target.nextElementSibling;
+    const toggled = !fieldset.hidden;
+    fieldset.hidden = toggled;
+    this.state.hiddenPreferences = toggled;
+    localStorage.setItem('NutrientRich-hidden-preferences', toggled);
+  }
+
+  /**
    * @returns {void}
    */
   render () {
     return this.html`
-    <fieldset>
-      <legend>Preferences</legend>
+    <button
+      data-call="togglePreferences"
+      onclick=${this}>Preferences</button>
+    <fieldset ?hidden=${this.state.hiddenPreferences}>
       <label>API Key:
         <input type="password"
           data-call="apiKeyChanged"
@@ -152,8 +166,12 @@ class NutrientRichPreferences extends HyperHTMLElement {
     const cacheFoods = JSON.parse(
       localStorage.getItem('NutrientRich-cache-foods') || 'true'
     );
+    const hiddenPreferences = JSON.parse(
+      localStorage.getItem('NutrientRich-hidden-preferences') || 'false'
+    );
 
     return {
+      hiddenPreferences,
       apiKey,
       cacheNutrients,
       cacheFoods
