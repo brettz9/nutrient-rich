@@ -71,13 +71,6 @@ class NutrientRichFoods extends HyperHTMLElement {
   /**
    * @returns {void}
    */
-  created () {
-
-  }
-
-  /**
-   * @returns {void}
-   */
   render () {
     const {chosenNutrientName, totalNeeded} = this.state;
 
