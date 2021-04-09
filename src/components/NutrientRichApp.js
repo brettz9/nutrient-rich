@@ -31,8 +31,8 @@ class NutrientRichApp extends HyperHTMLElement {
      */
     this.addEventListener('NutrientRich-refresh-nutrients', async (e) => {
       let nutrients;
-      const caching = e.detail;
-      if (caching) {
+      const {caching, noForce} = e.detail;
+      if (caching && noForce) {
         nutrients = localStorage.getItem('NutrientRich-nutrients-cache');
       }
       if (nutrients) {
@@ -46,6 +46,9 @@ class NutrientRichApp extends HyperHTMLElement {
             'NutrientRich-nutrients-cache', JSON.stringify(nutrients)
           );
         }
+        if (!noForce) {
+          this.render();
+        }
       }
     });
 
@@ -55,8 +58,8 @@ class NutrientRichApp extends HyperHTMLElement {
      */
     this.addEventListener('NutrientRich-refresh-foods', async (e) => {
       let foodInfo;
-      const caching = e.detail;
-      if (caching) {
+      const {caching, noForce} = e.detail;
+      if (caching && noForce) {
         foodInfo = localStorage.getItem('NutrientRich-foodInfo-cache');
       }
       if (foodInfo) {
@@ -69,6 +72,9 @@ class NutrientRichApp extends HyperHTMLElement {
           localStorage.setItem(
             'NutrientRich-foodInfo-cache', JSON.stringify(foodInfo)
           );
+        }
+        if (!noForce) {
+          this.render();
         }
       }
     });

@@ -112,22 +112,32 @@ class NutrientRichPreferences extends HyperHTMLElement {
       return;
     }
     this.dispatch('NutrientRich-api-changed', apiKey);
-    this.refreshNutrients();
-    this.refreshFoods();
+    this.refreshNutrients({noForce: true});
+    this.refreshFoods({noForce: true});
   }
 
   /**
+   * @param {Event} e
+   * @param {boolean} e.noForce
    * @returns {void}
    */
-  refreshNutrients () {
-    this.dispatch('NutrientRich-refresh-nutrients', this.state.cacheNutrients);
+  refreshNutrients ({noForce}) {
+    this.dispatch('NutrientRich-refresh-nutrients', {
+      noForce,
+      caching: this.state.cacheNutrients
+    });
   }
 
   /**
+   * @param {Event} e
+   * @param {boolean} e.noForce
    * @returns {void}
    */
-  refreshFoods () {
-    this.dispatch('NutrientRich-refresh-foods', this.state.cacheFoods);
+  refreshFoods ({noForce}) {
+    this.dispatch('NutrientRich-refresh-foods', {
+      noForce,
+      caching: this.state.cacheFoods
+    });
   }
 
   /**
