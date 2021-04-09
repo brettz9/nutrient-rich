@@ -34,10 +34,10 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
     potency, i.e., needing a lower amount, though might also prefer
     non-decimal ones or closer to "1"
 
-## Medium-priority to-dos
+## Medium-priority (or lower) to-dos
 
-1. Might use custom elements features of hyperHTMLElement for readability
 1. Use `rank` if useful (a matter of proportional power?)
+1. Implement service worker for full offline use/caching
 
 ## FAQ
 
