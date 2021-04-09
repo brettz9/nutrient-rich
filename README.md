@@ -32,6 +32,7 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 1. General fixes to input box setting
     1. Reason for **non-matching names**?
     1. Need for **unit comparison**?
+    1. Display **table unit in more readable format**
 1. **Pagination** to see (or grab?) more foods
 1. Option to **filter** inputs by non-zero ones and **sort** at least by
     potency, i.e., needing a lower amount, though might also prefer
