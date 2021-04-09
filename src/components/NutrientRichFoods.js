@@ -86,28 +86,30 @@ class NutrientRichFoods extends HyperHTMLElement {
     foodNutrients.some(({amount, name, unitName}) => {
       // console.log('chosenNutrientName === name', chosenNutrientName, name);
       const normalizedUnitName = normalizeUnitName(unitName);
-      if (chosenNutrientName === name) {
-        // eslint-disable-next-line no-console -- Debugging
-        console.log(
-          'nme === name',
-          normalizedUnitName,
-          this.state.chosenNutrientUnitName,
-
-          chosenNutrientName === name,
-          chosenNutrientName, name,
-          totalNeeded, amount
-        );
-        nutrientUnitName = normalizedUnitName;
-
-        const amountFactor = totalNeeded / amount;
-
-        nutrientAmount = roundDigits(amount);
-        nutrientAmountPerUnit = amountFactor === Number.POSITIVE_INFINITY
-          ? 'N/A'
-          : roundDigits(amountFactor);
-        return true;
+      if (chosenNutrientName !== name ||
+        normalizedUnitName !== this.state.chosenNutrientUnitName
+      ) {
+        return false;
       }
-      return false;
+      // eslint-disable-next-line no-console -- Debugging
+      console.log(
+        'nme === name',
+        normalizedUnitName,
+        this.state.chosenNutrientUnitName,
+
+        chosenNutrientName === name,
+        chosenNutrientName, name,
+        totalNeeded, amount
+      );
+      nutrientUnitName = normalizedUnitName;
+
+      const amountFactor = totalNeeded / amount;
+
+      nutrientAmount = roundDigits(amount);
+      nutrientAmountPerUnit = amountFactor === Number.POSITIVE_INFINITY
+        ? 'N/A'
+        : roundDigits(amountFactor);
+      return true;
     });
 
     // 100 GRAND Bar (early in list); id=1104067
