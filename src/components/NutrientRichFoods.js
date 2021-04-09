@@ -75,7 +75,8 @@ class NutrientRichFoods extends HyperHTMLElement {
         // eslint-disable-next-line no-console -- Debugging
         console.log(
           'nme === name', chosenNutrientName === name,
-          chosenNutrientName, name, unitName,
+          chosenNutrientName, name,
+          unitName,
           totalNeeded, amount
         );
         nutrientUnitName = unitName;
@@ -95,10 +96,10 @@ class NutrientRichFoods extends HyperHTMLElement {
     return `<tr><td><label for="amount_${id}">${desc}</label></td>` +
       `<td><input id="amount_${id}" value=${
         nutrientAmount
-      }> <span id="unit_${id}">${
+      }> <span>${
         nutrientUnitName
       }</span></td>` +
-      `<td><input id="amountPerUnit_${id}" value=${
+      `<td><input value=${
         nutrientAmountPerUnit
       }></td></tr>`;
   })
