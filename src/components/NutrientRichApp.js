@@ -171,6 +171,7 @@ class NutrientRichApp extends HyperHTMLElement {
     ? this.foodsComponent.update({
       apiKey: this.state.apiKey,
       chosenNutrientName: this.state.chosenNutrientName,
+      chosenNutrientUnitName: this.state.chosenNutrientUnitName,
       totalNeeded: this.state.ingredientNeeded
     })
     : ''}

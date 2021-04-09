@@ -2,6 +2,18 @@ import HyperHTMLElement from '../../vendor/hyperhtml-element.js';
 import {roundDigits} from '../utils.js';
 
 /**
+ * @param {string} name
+ * @returns {string}
+ */
+function normalizeUnitName (name) {
+  return new Map([
+    ['MG', 'mg'],
+    ['G', 'g'],
+    ['UG', 'µg']
+  ]).get(name) || name;
+}
+
+/**
  * @extends HyperHTMLElement
  */
 class NutrientRichFoods extends HyperHTMLElement {
@@ -60,9 +72,11 @@ class NutrientRichFoods extends HyperHTMLElement {
 
     return this.html`
       <table>
-        <tr><th>Food</th>
+        <tr>
+          <th>Food</th>
+          <th>Amount per unit</th>
           <th>Amount of food required</th>
-          <th>Amount per unit</th></tr>
+        </tr>
         ${
   this.state.foodInfo.map(({fdcId: id, description: desc, foodNutrients}) => {
     let nutrientAmount = 0;
@@ -71,15 +85,19 @@ class NutrientRichFoods extends HyperHTMLElement {
 
     foodNutrients.some(({amount, name, unitName}) => {
       // console.log('chosenNutrientName === name', chosenNutrientName, name);
+      const normalizedUnitName = normalizeUnitName(unitName);
       if (chosenNutrientName === name) {
         // eslint-disable-next-line no-console -- Debugging
         console.log(
-          'nme === name', chosenNutrientName === name,
+          'nme === name',
+          normalizedUnitName,
+          this.state.chosenNutrientUnitName,
+
+          chosenNutrientName === name,
           chosenNutrientName, name,
-          unitName,
           totalNeeded, amount
         );
-        nutrientUnitName = unitName;
+        nutrientUnitName = normalizedUnitName;
 
         const amountFactor = totalNeeded / amount;
 
@@ -94,14 +112,15 @@ class NutrientRichFoods extends HyperHTMLElement {
 
     // 100 GRAND Bar (early in list); id=1104067
     return `<tr><td><label for="amount_${id}">${desc}</label></td>` +
+      `<td><input value=${
+        nutrientAmountPerUnit
+      }> </td>` +
       `<td><input id="amount_${id}" value=${
         nutrientAmount
       }> <span>${
         nutrientUnitName
       }</span></td>` +
-      `<td><input value=${
-        nutrientAmountPerUnit
-      }></td></tr>`;
+      `</tr>`;
   })
 }
       </table>
