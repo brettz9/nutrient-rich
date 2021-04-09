@@ -194,7 +194,6 @@ class NutrientRichApp extends HyperHTMLElement {
     ) || this.ingredientNeeded;
 
     return {
-      foodInfo: [],
       apiKey,
       ingredientNeeded,
       chosenNutrientUnitName: '',

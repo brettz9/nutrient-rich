@@ -2101,7 +2101,7 @@ const weakly = (obj, type) => {
   return wire[id] || (wire[id] = content(type));
 };
 
-// A document fragment loses its nodes
+// A document fragment loses its nodes 
 // as soon as it is appended into another node.
 // This has the undesired effect of losing wired content
 // on a second render call, because (by then) the fragment would be empty:

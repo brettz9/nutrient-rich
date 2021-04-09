@@ -1,5 +1,9 @@
 import HyperHTMLElement from '../../vendor/hyperhtml-element.js';
+import jQuery from '../../vendor/jquery.min.js';
+import dt from '../../vendor/jquery.dataTables.js';
 import {roundDigits} from '../utils.js';
+
+window.dt = dt(window, jQuery);
 
 /**
  * @param {string} name
@@ -67,72 +71,88 @@ class NutrientRichFoods extends HyperHTMLElement {
   /**
    * @returns {void}
    */
+  created () {
+
+  }
+
+  /**
+   * @returns {void}
+   */
   render () {
     const {chosenNutrientName, totalNeeded} = this.state;
 
     // console.log('foodInfo', this.state.foodInfo);
 
-    return this.html`
-      <table>
-        <tr>
-          <th>Food</th>
-          <th>Amount per unit</th>
-          <th>Amount of food required</th>
-        </tr>
-        ${
-  this.state.foodInfo.map(({fdcId: id, description: desc, foodNutrients}) => {
-    let nutrientAmount = 0;
-    let nutrientAmountPerUnit = 0;
-    let nutrientUnitName = '';
+    const rows = this.state.foodInfo.map(({
+      fdcId: id, description: desc, foodNutrients
+    }) => {
+      let nutrientAmount = 0;
+      let nutrientAmountPerUnit = 0;
+      let nutrientUnitName = '';
 
-    if (!foodNutrients.some(({amount, name, unitName}) => {
-      // console.log('chosenNutrientName === name', chosenNutrientName, name);
-      const normalizedUnitName = normalizeUnitName(unitName);
-      if (chosenNutrientName !== name ||
-        normalizedUnitName !== this.state.chosenNutrientUnitName
-      ) {
-        return false;
+      if (!foodNutrients.some(({amount, name, unitName}) => {
+        // console.log('chosenNutrientName === name', chosenNutrientName, name);
+        nutrientUnitName = normalizeUnitName(unitName);
+        if (chosenNutrientName !== name ||
+          nutrientUnitName !== this.state.chosenNutrientUnitName
+        ) {
+          return false;
+        }
+        // eslint-disable-next-line no-console -- Debugging
+        console.log(
+          'nme === name',
+          nutrientUnitName,
+          this.state.chosenNutrientUnitName,
+
+          chosenNutrientName === name,
+          chosenNutrientName, name,
+          totalNeeded, amount
+        );
+
+        const amountFactor = totalNeeded / amount;
+
+        nutrientAmount = roundDigits(amount);
+        nutrientAmountPerUnit = amountFactor === Number.POSITIVE_INFINITY
+          ? 'N/A'
+          : roundDigits(amountFactor);
+        return true;
+      })) {
+        // console.log('not found', chosenNutrientName,
+        //   foodNutrients.map(({name}) => name)
+        // );
       }
-      // eslint-disable-next-line no-console -- Debugging
-      console.log(
-        'nme === name',
-        normalizedUnitName,
-        this.state.chosenNutrientUnitName,
 
-        chosenNutrientName === name,
-        chosenNutrientName, name,
-        totalNeeded, amount
-      );
-      nutrientUnitName = normalizedUnitName;
-
-      const amountFactor = totalNeeded / amount;
-
-      nutrientAmount = roundDigits(amount);
-      nutrientAmountPerUnit = amountFactor === Number.POSITIVE_INFINITY
-        ? 'N/A'
-        : roundDigits(amountFactor);
-      return true;
-    })) {
-      // console.log('not found', chosenNutrientName,
-      //   foodNutrients.map(({name}) => name)
-      // );
-    }
-
-    // 100 GRAND Bar (early in list); id=1104067
-    return `<tr><td><label for="amount_${id}">${desc}</label></td>` +
-      `<td><input value=${
-        nutrientAmountPerUnit
-      }> </td>` +
-      `<td><input id="amount_${id}" value=${
-        nutrientAmount
-      }> <span>${
+      // 100 GRAND Bar (early in list); id=1104067
+      return [
+        desc,
+        nutrientAmountPerUnit,
+        nutrientAmount,
         nutrientUnitName
-      }</span></td>` +
-      `</tr>`;
-  })
-}
+      ];
+    });
+
+    const columns = [
+      'Food',
+      'Amount per unit',
+      'Amount of food required'
+    ].map((column) => ({title: column}));
+
+    const tableContainer = this.html`
+      <table>
+        <thead></thead>
+        <tbody>
+        </tbody>
       </table>
     `;
+
+    const table = tableContainer.querySelector('table');
+    jQuery(table).DataTable({
+      destroy: true,
+      data: rows,
+      columns
+    });
+
+    return tableContainer;
   }
 
   // fdcId=1104086;
