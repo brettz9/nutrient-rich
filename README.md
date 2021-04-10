@@ -1,6 +1,7 @@
 # nutrient-rich
 
-***This project is in early beta. The [demo](https://brettz9.github.io/nutrient-rich/src/).***
+***This project is in early beta. The [demo](https://brettz9.github.io/nutrient-rich/src/) appears to basically work in at least Chrome, Firefox,
+and Safari.***
 
 <!-- ```
 npm i nutrient-rich
