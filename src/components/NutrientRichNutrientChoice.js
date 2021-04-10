@@ -98,7 +98,7 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
       encodeURIComponent(apiKey)
     }`;
     */
-    const url = '../../data/nutrients.json';
+    const url = '../data/nutrients.json';
     const req = await fetch(url);
     const nutrients = await req.json();
 
