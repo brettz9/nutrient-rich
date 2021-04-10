@@ -104,8 +104,8 @@ class NutrientRichFoods extends HyperHTMLElement {
 
         const amountFactor = totalNeeded / amount;
 
-        nutrientAmount = roundDigits(amount);
-        nutrientAmountPerUnit = amountFactor === Number.POSITIVE_INFINITY
+        nutrientAmountPerUnit = roundDigits(amount);
+        nutrientAmount = amountFactor === Number.POSITIVE_INFINITY
           ? 'N/A'
           : roundDigits(amountFactor);
         return true;
@@ -124,8 +124,8 @@ class NutrientRichFoods extends HyperHTMLElement {
       return [
         desc,
         nutrientAmountPerUnit,
-        nutrientAmount,
-        nutrientUnitName
+        nutrientAmount
+        // nutrientUnitName
       ];
     }).filter((o) => o);
 
