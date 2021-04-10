@@ -29,7 +29,8 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. Figure out why some nutrients are missing
+1. Avoid preselecting nutrient (or show value by default)
+1. Figure out why some nutrients were missing (still?)
 
 ## Possible to-dos
 
