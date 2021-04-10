@@ -83,6 +83,16 @@ class NutrientRichFoods extends HyperHTMLElement {
     } = this.state;
     // console.log('foodInfo', this.state.foodInfo);
 
+    if (!this.state.foodInfo.length) {
+      return this.html`
+        <div style="text-align: center;">
+          <b><i>Loading...</i><br><br>(Depending on your connection,
+            may take several minutes to download the 25 MB of
+            food data, at least the first time.)</b>
+        </div>
+      `;
+    }
+
     const rows = this.state.foodInfo.map(({
       fdcId: id, description: desc, foodNutrients
     }) => {
