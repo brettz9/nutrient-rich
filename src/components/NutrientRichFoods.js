@@ -160,10 +160,20 @@ class NutrientRichFoods extends HyperHTMLElement {
     // Todo: Supply nutrients to API for shortening specific food result or
     //   just cache?
 
-    const apiURL = `${this.apiBaseURL}foods/list?api_key=${
+    const itemsPerPage = 200;
+    const maxPages = 50;
+    const url = `../../data/food-items${
+      itemsPerPage
+    }_pages1-${maxPages}.json`;
+
+    /*
+    // This would only
+    const url = `${this.apiBaseURL}foods/list?api_key=${
       encodeURIComponent(apiKey)
     }`; // &sortBy=description&sortOrder=asc  (What is the correct structure)?
-    const req = await fetch(apiURL);
+    */
+
+    const req = await fetch(url);
 
     // fdcId, description
     // dataType, publicationDate, foodCode

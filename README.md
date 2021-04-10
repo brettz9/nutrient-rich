@@ -29,9 +29,9 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
+1. Move **nutrients API to build** step and load without caching (or
+    API key).
 1. Tie **pagination** (and **caching**) into **retrieval of more foods**.
-    1. Try `search` with `searchKey:"..."` for specific `foodNutrients`
-        value?
     2. Cache 1-200 (higher gives error due to no more data?) pages??
         Should really store on own server, as single file for those
         who wish to download
@@ -51,6 +51,20 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 No nutrient was found listed with these items (or if the requested nutrient's
 indicated API-supplied unit was not found to be the same as the API-supplied
 unit for the food (though this presumably should not occur)).
+
+### Why not run off the live API?
+
+We were trying for a dual offline-online version, but there are
+some problems with this:
+
+1. Required an API key by the user
+1. Required usage of a significant amount of API data: ~25MB.
+1. Require a number of requests to get all of the food data (50 requests
+    of a full 200 items' load of metadata)
+1. Would be sluggish for the user
+
+Our build script uses the API, however, so feel free to request
+periodic updates if we are behind schedule and changes have been made.
 
 ## Ideas for longer term
 

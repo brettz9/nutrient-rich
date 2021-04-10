@@ -16,5 +16,9 @@ module.exports = {
       'Object.entries'
     ]
   },
+  overrides: [{
+    files: 'build/**',
+    extends: ['ash-nazg/sauron-node-script-overrides']
+  }],
   extends: ['ash-nazg/sauron-overrides']
 };

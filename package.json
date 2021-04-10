@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "rollup": "rollup -c",
+    "build-urls": "node build/build.js",
     "watch": "srr --port=8003",
     "start": "static --port=8003",
     "open": "open-cli http://localhost:8003/src/ && npm start",
@@ -31,7 +32,7 @@
   },
   "homepage": "https://github.com/brettz9/nutrient-rich",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "dependencies": {
     "datatables.net": "^1.10.24",
@@ -61,6 +62,7 @@
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-radar": "^0.2.1",
     "eslint-plugin-unicorn": "^29.0.0",
+    "node-fetch": "^2.6.1",
     "open-cli": "^6.0.1",
     "rollup": "^2.44.0",
     "serve-reload-replace": "^1.1.10"

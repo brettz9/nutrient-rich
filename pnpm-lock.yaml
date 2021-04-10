@@ -26,6 +26,7 @@ specifiers:
   hyperhtml: ^2.34.0
   hyperhtml-element: ^3.14.0
   jquery: ^3.6.0
+  node-fetch: ^2.6.1
   open-cli: ^6.0.1
   rollup: ^2.44.0
   serve-reload-replace: ^1.1.10
@@ -58,6 +59,7 @@ devDependencies:
   eslint-plugin-promise: 4.3.1
   eslint-plugin-radar: 0.2.1_eslint@7.23.0
   eslint-plugin-unicorn: 29.0.0_eslint@7.23.0
+  node-fetch: 2.6.1
   open-cli: 6.0.1
   rollup: 2.44.0
   serve-reload-replace: 1.1.10
@@ -2069,6 +2071,11 @@ packages:
     resolution: {integrity: sha512-NAppJ0YecKWdhSXFYCHbo6RutiX8vOt/Jo3l46mUg6pQlpJNaqc5cGxdrW2jITQm5JIYySbFVPDl3RrREXNyPw==}
     dependencies:
       ansi-regex: 2.1.1
+    dev: true
+
+  /node-fetch/2.6.1:
+    resolution: {integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==}
+    engines: {node: 4.x || >=6.0.0}
     dev: true
 
   /node-releases/1.1.71:
