@@ -32,8 +32,8 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
    */
   get defaultState () {
     return {
-      // Amino Acids (early in list after stranger DHA names)
-      selectedNutrient: '629',
+      // Energy
+      selectedNutrient: '268',
       // apiKey: '',
       nutrients: this.nutrients || []
     };

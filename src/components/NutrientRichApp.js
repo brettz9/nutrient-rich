@@ -210,7 +210,7 @@ class NutrientRichApp extends HyperHTMLElement {
       // apiKey,
       ingredientNeeded,
       chosenNutrientUnitName: '',
-      chosenNutrientName: 'Amino acids'
+      chosenNutrientName: 'Energy'
     };
   }
 }

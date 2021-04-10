@@ -63,7 +63,7 @@ class NutrientRichFoods extends HyperHTMLElement {
     return {
       // apiKey: '',
       totalNeeded: '',
-      chosenNutrientName: 'Amino acids',
+      chosenNutrientName: 'Energy',
       foodInfo: this.foodInfo || []
     };
   }
@@ -110,9 +110,14 @@ class NutrientRichFoods extends HyperHTMLElement {
           : roundDigits(amountFactor);
         return true;
       })) {
-        // console.log('not found', chosenNutrientName,
-        //   foodNutrients.map(({name}) => name)
-        // );
+        /*
+        // eslint-disable-next-line no-console -- Feedback
+        console.log(
+          'not found', chosenNutrientName,
+          foodNutrients.map(({name}) => name)
+        );
+        */
+        return null;
       }
 
       // 100 GRAND Bar (early in list); id=1104067
@@ -122,7 +127,7 @@ class NutrientRichFoods extends HyperHTMLElement {
         nutrientAmount,
         nutrientUnitName
       ];
-    });
+    }).filter((o) => o);
 
     const columns = [
       'Food',
