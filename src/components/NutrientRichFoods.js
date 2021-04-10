@@ -140,7 +140,7 @@ class NutrientRichFoods extends HyperHTMLElement {
     const columns = [
       'Food',
       'Amount per unit',
-      'Amount of food required'
+      'Number of units of food required'
     ].map((column) => ({title: column}));
 
     const tableContainer = this.html`
