@@ -19,11 +19,13 @@ class NutrientRichApp extends HyperHTMLElement {
 
     this.ingredientNeeded = ingredientNeeded;
 
+    /*
     this.addEventListener('NutrientRich-api-changed', (e) => {
       this.setState({
         apiKey: e.detail
       });
     });
+    */
 
     /**
      * @param {Event} e
@@ -77,7 +79,7 @@ class NutrientRichApp extends HyperHTMLElement {
             // Persistent storage not being allowed on Firefox to
             //   store our 26MB file
             // eslint-disable-next-line no-console -- Inform user
-            console.log('Failed to set cache');
+            console.log('Failed to set cache:', err);
           }
         }
         if (!noForce) {
@@ -128,20 +130,22 @@ class NutrientRichApp extends HyperHTMLElement {
   }
 
   /**
-   * Attribute only available here.
+   * Attribute only available here. We could probably drop this
+   * in favor of plain elements; just keeping in case need to
+   * pass or resuming passing in data.
    * @returns {void}
    */
   created () {
-    const apiBaseURL = this.getAttribute('api-base-url');
+    // const apiBaseURL = this.getAttribute('api-base-url');
     // Change to a property if this might be set by the
     //   user (e.g., for access to other food APIs)
-    this.apiKey = this.getAttribute('api-key');
+    // this.apiKey = this.getAttribute('api-key');
 
     this.nutrientChoiceComponent = new NutrientRichNutrientChoice({
-      apiBaseURL
+      // apiBaseURL
     });
     this.foodsComponent = new NutrientRichFoods({
-      apiBaseURL
+      // apiBaseURL
     });
 
     // Needed when `created` is used
@@ -167,21 +171,23 @@ class NutrientRichApp extends HyperHTMLElement {
 
         ${
   // Make these conditional to avoid showing empty skeletons
-  this.state.apiKey
-    ? this.nutrientChoiceComponent.update({
-      apiKey: this.state.apiKey
-    })
-    : ''}
+  // this.state.apiKey ?
+  this.nutrientChoiceComponent.update({
+    apiKey: this.state.apiKey
+  })
+  // : ''
+}
             <br><br>
         ${
-  this.state.apiKey
-    ? this.foodsComponent.update({
-      apiKey: this.state.apiKey,
-      chosenNutrientName: this.state.chosenNutrientName,
-      chosenNutrientUnitName: this.state.chosenNutrientUnitName,
-      totalNeeded: this.state.ingredientNeeded
-    })
-    : ''}
+  // this.state.apiKey ?
+  this.foodsComponent.update({
+    apiKey: this.state.apiKey,
+    chosenNutrientName: this.state.chosenNutrientName,
+    chosenNutrientUnitName: this.state.chosenNutrientUnitName,
+    totalNeeded: this.state.ingredientNeeded
+  })
+  // : */ ''
+}
       </section>
     `;
   }
@@ -194,14 +200,14 @@ class NutrientRichApp extends HyperHTMLElement {
    * }}
    */
   get defaultState () {
-    const {apiKey} = this;
+    // const {apiKey} = this;
 
     const ingredientNeeded = localStorage.getItem(
       'NutrientRich-ingredient-needed'
     ) || this.ingredientNeeded;
 
     return {
-      apiKey,
+      // apiKey,
       ingredientNeeded,
       chosenNutrientUnitName: '',
       chosenNutrientName: 'Amino acids'

@@ -16,10 +16,10 @@ class NutrientRichPreferences extends HyperHTMLElement {
         ),
         cacheFoods: JSON.parse(
           localStorage.getItem('NutrientRich-cache-foods') || 'true'
-        ),
-        apiKey: localStorage.getItem('NutrientRich-api-key')
+        )
+        // apiKey: localStorage.getItem('NutrientRich-api-key')
       });
-      this.refresh(apiKey);
+      this.refresh(/* apiKey */);
     });
   }
 
@@ -58,7 +58,7 @@ class NutrientRichPreferences extends HyperHTMLElement {
    * @returns {NutrientRichPreferences}
    */
   created () {
-    this.refresh(localStorage.getItem('NutrientRich-api-key'));
+    this.refresh(/* localStorage.getItem('NutrientRich-api-key') */);
     return this.render();
   }
 
@@ -83,12 +83,12 @@ class NutrientRichPreferences extends HyperHTMLElement {
       data-call="togglePreferences"
       onclick=${this}>Preferences</button>
     <fieldset ?hidden=${this.state.hiddenPreferences}>
-      <label>API Key:
+      ${/* <label>API Key:
         <input type="password"
           data-call="apiKeyChanged"
           onchange=${this}
           value=${this.state.apiKey}>
-      </label><br><br>
+      </label><br><br> */ ''}
       <label>
         Cache nutrients for reload:
         <input
@@ -122,10 +122,12 @@ class NutrientRichPreferences extends HyperHTMLElement {
    * @returns {void}
    */
   refresh (apiKey) {
+    /*
     if (!apiKey) {
       return;
     }
     this.dispatch('NutrientRich-api-changed', apiKey);
+    */
     this.refreshNutrients({noForce: true});
     this.refreshFoods({noForce: true});
   }
@@ -154,11 +156,14 @@ class NutrientRichPreferences extends HyperHTMLElement {
     });
   }
 
+  /* eslint-disable class-methods-use-this -- Not needed for now */
   /**
    * @returns {{apiKey: string}}
    */
   get defaultState () {
-    const apiKey = localStorage.getItem('NutrientRich-api-key') || this.apiKey;
+    // const apiKey = localStorage.getItem(
+    //   'NutrientRich-api-key'
+    // ) || this.apiKey;
 
     const cacheNutrients = JSON.parse(
       localStorage.getItem('NutrientRich-cache-nutrients') || 'true'
@@ -171,12 +176,13 @@ class NutrientRichPreferences extends HyperHTMLElement {
     );
 
     return {
+      // apiKey,
       hiddenPreferences,
-      apiKey,
       cacheNutrients,
       cacheFoods
     };
   }
+  /* eslint-enable class-methods-use-this -- Not needed for now */
 
   /**
    * @param {Event} e

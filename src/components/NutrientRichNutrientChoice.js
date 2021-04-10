@@ -34,7 +34,7 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
     return {
       // Amino Acids (early in list after stranger DHA names)
       selectedNutrient: '629',
-      apiKey: '',
+      // apiKey: '',
       nutrients: this.nutrients || []
     };
   }
@@ -84,11 +84,11 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
     });
   }
 
+  // * @param {ApiKey} apiKey
   /**
-   * @param {ApiKey} apiKey
    * @returns {Promise<Nutrients>}
    */
-  async getNutrients (apiKey = this.state.apiKey) {
+  async getNutrients (/* apiKey = this.state.apiKey */) {
     /*
     // Live API (also probably was problematic in only getting a sampling
     //   of nutrients)

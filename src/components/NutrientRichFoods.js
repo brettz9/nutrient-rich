@@ -61,7 +61,7 @@ class NutrientRichFoods extends HyperHTMLElement {
    */
   get defaultState () {
     return {
-      apiKey: '',
+      // apiKey: '',
       totalNeeded: '',
       chosenNutrientName: 'Amino acids',
       foodInfo: this.foodInfo || []
@@ -152,11 +152,11 @@ class NutrientRichFoods extends HyperHTMLElement {
   // format=abridged|full (full is default)
   // nutrients=1,2,3,...25 (requesting on these nutrient IDs in results)
 
+  // * @param {ApiKey} apiKey
   /**
-   * @param {ApiKey} apiKey
    * @returns {Promise<void>}
    */
-  async getFoods (apiKey = this.state.apiKey) {
+  async getFoods (/* apiKey = this.state.apiKey */) {
     // Todo: Supply nutrients to API for shortening specific food result or
     //   just cache?
 
