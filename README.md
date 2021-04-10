@@ -29,10 +29,6 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. Tie **pagination** (and **caching**) into **retrieval of more foods**.
-    2. Cache 1-200 (higher gives error due to no more data?) pages??
-        Should really store on own server, as single file for those
-        who wish to download
 1. Option to **filter** inputs by non-zero ones and **sort** at least by
     potency, i.e., needing a lower amount, though might also prefer
     non-decimal ones or closer to "1"

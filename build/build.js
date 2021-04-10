@@ -14,7 +14,8 @@ function normalizeUnitName (name) {
   return new Map([
     ['MG', 'mg'],
     ['G', 'g'],
-    ['UG', 'µg']
+    ['UG', 'µg'],
+    ['KCAL', 'kcal']
   ]).get(name) || name;
 }
 

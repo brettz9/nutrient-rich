@@ -13,7 +13,8 @@ function normalizeUnitName (name) {
   return new Map([
     ['MG', 'mg'],
     ['G', 'g'],
-    ['UG', 'µg']
+    ['UG', 'µg'],
+    ['KCAL', 'kcal']
   ]).get(name) || name;
 }
 
@@ -72,7 +73,9 @@ class NutrientRichFoods extends HyperHTMLElement {
    * @returns {void}
    */
   render () {
-    const {chosenNutrientName, totalNeeded} = this.state;
+    const {
+      chosenNutrientName, totalNeeded
+    } = this.state;
 
     // console.log('foodInfo', this.state.foodInfo);
 
