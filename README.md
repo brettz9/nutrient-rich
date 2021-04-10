@@ -29,9 +29,9 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. Option to **filter** inputs by non-zero ones and **sort** at least by
-    potency, i.e., needing a lower amount, though might also prefer
-    non-decimal ones or closer to "1"
+1. **Sort** at least by potency, i.e., needing a lower amount,
+1. **Options** to prefer non-decimal ones or threshold <= (e.g., "1")
+1. **Table centering**
 
 ## Medium-priority (or lower) to-dos
 

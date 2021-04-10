@@ -115,6 +115,23 @@ class NutrientRichApp extends HyperHTMLElement {
    * @param {Event} e
    * @returns {void}
    */
+  hideZeroChanged (e) {
+    const {checked: hideZeroAmountFoods} = e.target;
+    localStorage.setItem(
+      'NutrientRich-hide-zero', hideZeroAmountFoods
+    );
+    this.setState({
+      hideZeroAmountFoods
+    });
+    this.foodsComponent.update({
+      hideZeroAmountFoods: this.state.hideZeroAmountFoods
+    });
+  }
+
+  /**
+   * @param {Event} e
+   * @returns {void}
+   */
   ingredientNeededChanged (e) {
     const {value: ingredientNeeded} = e.target;
 
@@ -161,19 +178,31 @@ class NutrientRichApp extends HyperHTMLElement {
 
       <br>
       <section>
+        <label>
+          <input
+            type="checkbox"
+            data-call="hideZeroChanged"
+            onclick=${this}
+            ?checked=${
+  this.state.hideZeroAmountFoods
+}>
+          Hide zero-amount foods
+        </label>
+        <br><br>
         <label>Amount of ingredient needed:
           <input
             id="ingredient-needed"
             data-call="ingredientNeededChanged"
             onchange=${this}
             value="${this.state.ingredientNeeded}">
-        </label> ${this.state.chosenNutrientUnitName}<br><br>
+        </label> ${this.state.chosenNutrientUnitName}
+        <br><br>
 
         ${
   // Make these conditional to avoid showing empty skeletons
   // this.state.apiKey ?
   this.nutrientChoiceComponent.update({
-    apiKey: this.state.apiKey
+    // apiKey: this.state.apiKey
   })
   // : ''
 }
@@ -181,10 +210,11 @@ class NutrientRichApp extends HyperHTMLElement {
         ${
   // this.state.apiKey ?
   this.foodsComponent.update({
-    apiKey: this.state.apiKey,
+    // apiKey: this.state.apiKey,
     chosenNutrientName: this.state.chosenNutrientName,
     chosenNutrientUnitName: this.state.chosenNutrientUnitName,
-    totalNeeded: this.state.ingredientNeeded
+    totalNeeded: this.state.ingredientNeeded,
+    hideZeroAmountFoods: this.state.hideZeroAmountFoods
   })
   // : */ ''
 }
@@ -196,7 +226,8 @@ class NutrientRichApp extends HyperHTMLElement {
    * @returns {{
    * apiKey: ApiKey,
    * ingredientNeeded: Ingredient,
-   * chosenNutrientUnitName: Unit
+   * chosenNutrientUnitName: Unit,
+   * hideZeroAmountFoods: boolean
    * }}
    */
   get defaultState () {
@@ -206,8 +237,13 @@ class NutrientRichApp extends HyperHTMLElement {
       'NutrientRich-ingredient-needed'
     ) || this.ingredientNeeded;
 
+    const hideZeroAmountFoods = JSON.parse(localStorage.getItem(
+      'NutrientRich-hide-zero'
+    ) || 'true');
+
     return {
       // apiKey,
+      hideZeroAmountFoods,
       ingredientNeeded,
       chosenNutrientUnitName: '',
       chosenNutrientName: 'Energy'

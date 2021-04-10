@@ -63,6 +63,7 @@ class NutrientRichFoods extends HyperHTMLElement {
   get defaultState () {
     return {
       // apiKey: '',
+      hideZeroAmountFoods: true,
       totalNeeded: '',
       chosenNutrientName: 'Energy',
       foodInfo: this.foodInfo || []
@@ -74,7 +75,7 @@ class NutrientRichFoods extends HyperHTMLElement {
    */
   render () {
     const {
-      chosenNutrientName, totalNeeded
+      chosenNutrientName, totalNeeded, hideZeroAmountFoods
     } = this.state;
 
     // console.log('foodInfo', this.state.foodInfo);
@@ -120,7 +121,7 @@ class NutrientRichFoods extends HyperHTMLElement {
           foodNutrients.map(({name}) => name)
         );
         */
-        return null;
+        return [desc, '0', 'N/A'];
       }
 
       // 100 GRAND Bar (early in list); id=1104067
@@ -130,7 +131,11 @@ class NutrientRichFoods extends HyperHTMLElement {
         nutrientAmount
         // nutrientUnitName
       ];
-    }).filter((o) => o);
+    }).filter((o) => {
+      const nutrientAmountPerUnit = o?.[1];
+      return !hideZeroAmountFoods ||
+        (nutrientAmountPerUnit && nutrientAmountPerUnit !== '0');
+    });
 
     const columns = [
       'Food',
