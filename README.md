@@ -29,6 +29,7 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
+1. Prompt initial load
 1. Figure out why some nutrients are missing
 
 ## Possible to-dos
