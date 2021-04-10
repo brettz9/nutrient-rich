@@ -8,6 +8,7 @@ import /* NutrientRichApp from */ './components/NutrientRichApp.js';
 // const baseURL = 'https://api.nal.usda.gov/fdc/v1/';
 
 (() => {
+/*
 if (!navigator.storage || !navigator.storage.persist) {
   HyperHTMLElement.bind($('body'))`
     <b>Your browser does not support persistent storage.
@@ -18,6 +19,7 @@ if (!navigator.storage || !navigator.storage.persist) {
   `;
   return;
 }
+*/
 HyperHTMLElement.bind($('body'))`
   <b>Requesting permissions...</b>
 `;
