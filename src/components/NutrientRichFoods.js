@@ -194,7 +194,7 @@ class NutrientRichFoods extends HyperHTMLElement {
 
     const itemsPerPage = 200;
     const maxPages = 50;
-    const url = `../../data/food-items${
+    const url = `../data/food-items${
       itemsPerPage
     }_pages1-${maxPages}.json`;
 
