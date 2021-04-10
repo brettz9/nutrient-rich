@@ -1,10 +1,66 @@
 'use strict';
 
-const {writeFile} = require('fs').promises;
+const {readFile, writeFile} = require('fs').promises;
 const {join} = require('path');
 
 // eslint-disable-next-line no-shadow -- Polyglot
 const fetch = require('node-fetch');
+
+/**
+ * @param {string} name
+ * @returns {string}
+ */
+function normalizeUnitName (name) {
+  return new Map([
+    ['MG', 'mg'],
+    ['G', 'g'],
+    ['UG', 'µg']
+  ]).get(name) || name;
+}
+
+/**
+ * @param {{foodNutrients: {name, unitName, number}}[]} results
+ * @returns {void}
+ */
+async function saveNutrients (results) {
+  const nutrientObjs = [];
+  results.forEach(({foodNutrients}) => {
+    foodNutrients.forEach(({
+      // `id` isn't part of the food result nutrient lists unless
+      //   getting an individual food item, so we use `number` which
+      //   appears it may also function as an ID (if not, we could try
+      //   name + unitName)
+      // name, unitName, number
+      name, unitName, number
+    }) => {
+      // Do we need these?
+      if ((/^\d+:\d+$/u).test(name)) {
+        return;
+      }
+      if (!nutrientObjs.find(({number: num, name: nutrientName}) => {
+        return num === number;
+      })) {
+        nutrientObjs.push({
+          name,
+          unitName: normalizeUnitName(unitName),
+          number
+        });
+      }
+    });
+  });
+  nutrientObjs.sort(
+    ({name: nameA}, {name: nameB}) => {
+      return nameA < nameB ? -1 : (nameA > nameB ? 1 : 0);
+    }
+  );
+  return await writeFile(
+    join(
+      __dirname,
+      '../data/nutrients.json'
+    ),
+    JSON.stringify(nutrientObjs, null, indent)
+  );
+}
 
 // CONFIG
 const {
@@ -28,8 +84,15 @@ const {
   sortBy = 'lowercaseDescription.keyword',
 
   // Set to 2 or 4 for readable, but optimizing for network speed
-  indent = 0
+  indent = 0,
+
+  updateNutrientsOnly = false
 } = require('../config.json');
+
+const foodsFile = join(
+  __dirname,
+  `../data/food-items${pageSize}_pages1-${maxPageNumber}.json`
+);
 
 /**
  * @param {number|string} pageNumber
@@ -48,6 +111,15 @@ function getURL (pageNumber) {
 }
 
 (async () => {
+if (updateNutrientsOnly) {
+  await saveNutrients(
+    JSON.parse(await readFile(foodsFile, 'utf8'))
+  );
+
+  // eslint-disable-next-line no-console -- CLI
+  console.log('Saved nutrients file only!');
+  return;
+}
 const pageNumbers = [];
 const results = (await Promise.all(
   [...Array.from({
@@ -72,12 +144,11 @@ const results = (await Promise.all(
 console.log('pageNumbers', pageNumbers);
 
 writeFile(
-  join(
-    __dirname,
-    `../data/food-items${pageSize}_pages1-${maxPageNumber}.json`
-  ),
+  foodsFile,
   JSON.stringify(results, null, indent)
 );
+
+await saveNutrients(results);
 
 // eslint-disable-next-line no-console -- CLI
 console.log('Complete!');

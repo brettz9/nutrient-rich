@@ -33,7 +33,7 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
   get defaultState () {
     return {
       // Amino Acids (early in list after stranger DHA names)
-      selectedNutrient: 2042,
+      selectedNutrient: '629',
       apiKey: '',
       nutrients: this.nutrients || []
     };
@@ -49,12 +49,12 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
         data-call="nutrientChoiceChanged"
         onchange=${this}>
         ${
-  this.state.nutrients.map(({id, name, unitName}) => {
+  this.state.nutrients.map(({number, name, unitName}) => {
     return `<option
               data-chosenNutrientName="${name}"
               data-chosenNutrientUnitName="${unitName}"
-              value="${id}"${
-  id === this.state.selectedNutrient ? ' selected="selected"' : ''
+              value="${number}"${
+  number === this.state.selectedNutrient ? ' selected="selected"' : ''
 }>${`${name} (${unitName})`}</option>`;
   })}
       </select>
@@ -75,7 +75,7 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
     );
 
     this.setState({
-      selectedNutrient: Number.parseInt(option.value)
+      selectedNutrient: option.value
     });
 
     this.dispatch('NutrientRich-nutrient-changed', {
@@ -89,19 +89,23 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
    * @returns {Promise<Nutrients>}
    */
   async getNutrients (apiKey = this.state.apiKey) {
-    // Just use a sample
+    /*
+    // Live API (also probably was problematic in only getting a sampling
+    //   of nutrients)
     const fdcId = '1104086';
-
-    // const apiURL = `https://api.nal.usda.gov/fdc/v1/json-spec?api_key=${apiKey}`;
-    const apiURL = `${this.apiBaseURL}food/${fdcId}?api_key=${
+    // const url = `https://api.nal.usda.gov/fdc/v1/json-spec?api_key=${apiKey}`;
+    const url = `${this.apiBaseURL}food/${fdcId}?api_key=${
       encodeURIComponent(apiKey)
     }`;
-    const req = await fetch(apiURL);
-    const json = await req.json();
+    */
+    const url = '../../data/nutrients.json';
+    const req = await fetch(url);
+    const nutrients = await req.json();
 
     // eslint-disable-next-line no-console -- Debugging
-    console.log('nutrients JSON', json);
+    console.log('nutrients JSON', nutrients);
 
+    /*
     const nutrients = json.foodNutrients.map(({nutrient}) => {
       return nutrient;
     }).filter(({
@@ -113,7 +117,7 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
       ({name: nameA}, {name: nameB}) => {
         return nameA < nameB ? -1 : (nameA > nameB ? 1 : 0);
       }
-    );
+    ); */
 
     this.setState({
       nutrients

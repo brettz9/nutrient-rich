@@ -69,9 +69,16 @@ class NutrientRichApp extends HyperHTMLElement {
       } else {
         foodInfo = await this.foodsComponent.getFoods();
         if (caching) {
-          localStorage.setItem(
-            'NutrientRich-foodInfo-cache', JSON.stringify(foodInfo)
-          );
+          try {
+            localStorage.setItem(
+              'NutrientRich-foodInfo-cache', JSON.stringify(foodInfo)
+            );
+          } catch (err) {
+            // Persistent storage not being allowed on Firefox to
+            //   store our 26MB file
+            // eslint-disable-next-line no-console -- Inform user
+            console.log('Failed to set cache');
+          }
         }
         if (!noForce) {
           this.render();
