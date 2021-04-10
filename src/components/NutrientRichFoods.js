@@ -65,6 +65,7 @@ class NutrientRichFoods extends HyperHTMLElement {
   get defaultState () {
     return {
       // apiKey: '',
+      targetCloseness: 'either',
       hideZeroAmountFoods: true,
       totalNeeded: '',
       chosenNutrientName: 'Energy',
@@ -77,9 +78,9 @@ class NutrientRichFoods extends HyperHTMLElement {
    */
   render () {
     const {
-      chosenNutrientName, totalNeeded, hideZeroAmountFoods
+      chosenNutrientName, totalNeeded, hideZeroAmountFoods,
+      targetCloseness
     } = this.state;
-
     // console.log('foodInfo', this.state.foodInfo);
 
     const rows = this.state.foodInfo.map(({
@@ -111,9 +112,15 @@ class NutrientRichFoods extends HyperHTMLElement {
 
         const amountFactor = totalNeeded / amount;
 
-        closenessToTarget = roundDigits(
-          Math.abs(totalNeeded - amount)
-        );
+        if (
+          targetCloseness === 'either' ||
+          (targetCloseness === 'greater' && amount - totalNeeded > 0) ||
+          (targetCloseness === 'less' && amount - totalNeeded < 0)
+        ) {
+          closenessToTarget = roundDigits(
+            Math.abs(totalNeeded - amount)
+          );
+        }
 
         nutrientAmountPerUnit = roundDigits(amount);
         nutrientAmount = amountFactor === Number.POSITIVE_INFINITY

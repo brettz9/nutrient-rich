@@ -132,6 +132,24 @@ class NutrientRichApp extends HyperHTMLElement {
    * @param {Event} e
    * @returns {void}
    */
+  targetClosenessChanged (e) {
+    const {value: targetCloseness} = e.target;
+
+    // eslint-disable-next-line no-console -- Debugging
+    console.log('new value', targetCloseness);
+    localStorage.setItem('NutrientRich-target-closeness', targetCloseness);
+
+    this.setState({targetCloseness});
+
+    this.foodsComponent.update({
+      targetCloseness
+    });
+  }
+
+  /**
+   * @param {Event} e
+   * @returns {void}
+   */
   ingredientNeededChanged (e) {
     const {value: ingredientNeeded} = e.target;
 
@@ -189,6 +207,23 @@ class NutrientRichApp extends HyperHTMLElement {
           Hide zero-amount foods
         </label>
         <br><br>
+        <label>
+          Closeness direction must be
+          <select
+            data-call="targetClosenessChanged"
+            onchange=${this}>
+            ${[
+    ['either', 'greater or less than'],
+    ['greater', 'greater than'],
+    ['less', 'less than']
+  ].map(([value, text]) => {
+    return `<option value="${value}"${
+      this.state.targetCloseness === value ? ' selected' : ''
+    }>${text}</option>`;
+  })}
+          </select> target
+        </label>
+        <br><br>
         <label>Amount of ingredient needed:
           <input
             id="ingredient-needed"
@@ -214,7 +249,8 @@ class NutrientRichApp extends HyperHTMLElement {
     chosenNutrientName: this.state.chosenNutrientName,
     chosenNutrientUnitName: this.state.chosenNutrientUnitName,
     totalNeeded: this.state.ingredientNeeded,
-    hideZeroAmountFoods: this.state.hideZeroAmountFoods
+    hideZeroAmountFoods: this.state.hideZeroAmountFoods,
+    targetCloseness: this.state.targetCloseness
   })
   // : */ ''
 }
@@ -227,7 +263,8 @@ class NutrientRichApp extends HyperHTMLElement {
    * apiKey: ApiKey,
    * ingredientNeeded: Ingredient,
    * chosenNutrientUnitName: Unit,
-   * hideZeroAmountFoods: boolean
+   * hideZeroAmountFoods: boolean,
+   * targetCloseness: "either"|"greater"|"less"
    * }}
    */
   get defaultState () {
@@ -241,9 +278,14 @@ class NutrientRichApp extends HyperHTMLElement {
       'NutrientRich-hide-zero'
     ) || 'true');
 
+    const targetCloseness = localStorage.getItem(
+      'NutrientRich-target-closeness'
+    ) || 'either';
+
     return {
       // apiKey,
       hideZeroAmountFoods,
+      targetCloseness,
       ingredientNeeded,
       chosenNutrientUnitName: '',
       chosenNutrientName: 'Energy'

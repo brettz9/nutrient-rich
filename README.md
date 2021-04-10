@@ -29,7 +29,7 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. For threshold, could insist it must be above or below only
+1. Figure out why some nutrients are missing
 
 ## Possible to-dos
 
