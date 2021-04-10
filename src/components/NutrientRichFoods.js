@@ -5,6 +5,8 @@ import {roundDigits} from '../utils.js';
 
 window.dt = dt(window, jQuery);
 
+const highClosenessMax = '999999999';
+
 /**
  * @param {string} name
  * @returns {string}
@@ -86,6 +88,7 @@ class NutrientRichFoods extends HyperHTMLElement {
       let nutrientAmount = 0;
       let nutrientAmountPerUnit = 0;
       let nutrientUnitName = '';
+      let closenessToTarget = highClosenessMax;
 
       if (!foodNutrients.some(({amount, name, unitName}) => {
         // console.log('chosenNutrientName === name', chosenNutrientName, name);
@@ -108,6 +111,10 @@ class NutrientRichFoods extends HyperHTMLElement {
 
         const amountFactor = totalNeeded / amount;
 
+        closenessToTarget = roundDigits(
+          Math.abs(totalNeeded - amount)
+        );
+
         nutrientAmountPerUnit = roundDigits(amount);
         nutrientAmount = amountFactor === Number.POSITIVE_INFINITY
           ? 'N/A'
@@ -121,13 +128,14 @@ class NutrientRichFoods extends HyperHTMLElement {
           foodNutrients.map(({name}) => name)
         );
         */
-        return [desc, '0', 'N/A'];
+        return [desc, '0', highClosenessMax, 'N/A'];
       }
 
       // 100 GRAND Bar (early in list); id=1104067
       return [
         desc,
         nutrientAmountPerUnit,
+        closenessToTarget,
         nutrientAmount
         // nutrientUnitName
       ];
@@ -139,7 +147,8 @@ class NutrientRichFoods extends HyperHTMLElement {
 
     const columns = [
       'Food',
-      'Amount per unit',
+      `Number of ${this.state.chosenNutrientUnitName} per serving`,
+      'Closeness to target (lower is closer)',
       'Number of units of food required'
     ].map((column) => ({title: column}));
 
@@ -155,7 +164,7 @@ class NutrientRichFoods extends HyperHTMLElement {
     jQuery(table).DataTable({
       destroy: true,
       columnDefs: [
-        {className: 'dt-center', targets: [1, 2]}
+        {className: 'dt-center', targets: [1, 3]}
       ],
       data: rows,
       columns

@@ -29,14 +29,15 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. **Sort** at least by potency, i.e., needing a lower amount, closer to
-    threshold (e.g., 1.0 or 0.9)
-1. **Options** hide non-decimal ones (+/- 0.x) or threshold <= (e.g., "1")
+1. For threshold, could insist it must be above or below only
 
-## Medium-priority (or lower) to-dos
+## Possible to-dos
 
+1. Retain and reapply **sort** order
+1. **Per nutrient memory**, e.g., amounts
 1. Use `rank` if useful (a matter of proportional power?)
-1. Implement service worker for full offline use/caching
+1. Implement **service worker** for full offline use/caching
+1. **Options** hide non-decimal ones (+/- 0.x) or threshold <= (e.g., "1")
 
 ## FAQ
 
