@@ -13,7 +13,8 @@
     "last 2 versions, not dead"
   ],
   "scripts": {
-    "rollup": "rollup -c",
+    "copy": "cp ./node_modules/datatables.net-dt/css/jquery.dataTables.css ./vendor/jquery.dataTables.css",
+    "rollup": "rollup -c && npm run copy",
     "build-urls": "node build/build.js",
     "watch": "srr --port=8003",
     "start": "static --port=8003",
