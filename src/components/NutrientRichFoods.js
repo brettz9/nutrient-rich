@@ -154,6 +154,9 @@ class NutrientRichFoods extends HyperHTMLElement {
     const table = tableContainer.querySelector('table');
     jQuery(table).DataTable({
       destroy: true,
+      columnDefs: [
+        {className: 'dt-center', targets: [1, 2]}
+      ],
       data: rows,
       columns
     });
