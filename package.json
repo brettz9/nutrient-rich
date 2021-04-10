@@ -13,7 +13,7 @@
     "last 2 versions, not dead"
   ],
   "scripts": {
-    "copy": "cp ./node_modules/datatables.net-dt/css/jquery.dataTables.css ./vendor/jquery.dataTables.css",
+    "copy": "cp ./node_modules/datatables.net-dt/css/jquery.dataTables.css ./vendor/jquery.dataTables.css && cp ./node_modules/datatables.net-dt/images/sort_asc.png images/sort_asc.png && cp ./node_modules/datatables.net-dt/images/sort_desc.png images/sort_desc.png && cp ./node_modules/datatables.net-dt/images/sort_both.png images/sort_both.png",
     "rollup": "rollup -c && npm run copy",
     "build-urls": "node build/build.js",
     "watch": "srr --port=8003",
