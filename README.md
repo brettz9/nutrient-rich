@@ -43,7 +43,9 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 1. Mention USDA source
 1. All caps to title case?
 1. `NaN` to something readable
-1. Links on food to nutrient info page
+1. Links on food to nutrient info page (like <https://food-nutrients.github.io/>
+    but accepting a GET param to preselect) and ability to "add to cart", to
+    add cumulatively
 1. Publish npm release
 
 ## Possible to-dos
@@ -53,6 +55,7 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 1. Use `rank` if useful (a matter of proportional power?)
 1. Implement **service worker** for full offline use/caching
 1. **Options** hide non-decimal ones (+/- 0.x) or threshold <= (e.g., "1")
+1. Could allow addition of **multiple nutrients + amounts**
 
 ## FAQ
 
