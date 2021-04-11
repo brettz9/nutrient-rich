@@ -43,9 +43,11 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 1. Mention USDA source
 1. All caps to title case?
 1. `NaN` to something readable
-1. Links on food to nutrient info page (like <https://food-nutrients.github.io/>
+1. Links on food to food info page (like <https://food-nutrients.github.io/>
     but accepting a GET param to preselect) and ability to "add to cart", to
-    add cumulatively
+    add foods cumulatively to the other view
+1. Could do guided tour like <https://food-nutrients.github.io/> on load
+    using <https://github.com/shipshapecode/shepherd>.
 1. Publish npm release
 
 ## Possible to-dos
