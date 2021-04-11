@@ -43,6 +43,7 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 1. Mention USDA source
 1. All caps to title case?
 1. `NaN` to something readable
+1. Links on food to nutrient info page
 1. Publish npm release
 
 ## Possible to-dos
