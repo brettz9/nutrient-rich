@@ -39,6 +39,7 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 	1. Number of calories per serving
 1. Review preferences and comment out if not particularly needed now
 1. Document 999999+ value
+1. `NaN` to something readable
 1. Publish npm release
 
 ## Possible to-dos
