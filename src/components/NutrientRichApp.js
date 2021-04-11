@@ -195,8 +195,6 @@ class NutrientRichApp extends HyperHTMLElement {
       <h2>Nutrient Rich</h2>
       <h3>Food Finder Toward Meeting Nutrient Requirements</h3>
       <section class="controls">
-        <nutrient-rich-preferences></nutrient-rich-preferences>
-        <br><br>
         <label>
           <input
             type="checkbox"
@@ -243,9 +241,11 @@ class NutrientRichApp extends HyperHTMLElement {
   })
   // : ''
 }
-            <br><br><br>
-    </section>
-    <section>
+        <br><br>
+        <nutrient-rich-preferences></nutrient-rich-preferences>
+        <br><br><br>
+      </section>
+      <section>
         ${
   // this.state.apiKey ?
   this.foodsComponent.update({
