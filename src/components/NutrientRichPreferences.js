@@ -172,7 +172,7 @@ class NutrientRichPreferences extends HyperHTMLElement {
       localStorage.getItem('NutrientRich-cache-foods') || 'true'
     );
     const hiddenPreferences = JSON.parse(
-      localStorage.getItem('NutrientRich-hidden-preferences') || 'false'
+      localStorage.getItem('NutrientRich-hidden-preferences') || 'true'
     );
 
     return {

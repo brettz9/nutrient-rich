@@ -45,9 +45,11 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
     return this.html`<label>
       <b>Nutrients</b>
       <select
+        required="required"
         id="nutrient-choice"
         data-call="nutrientChoiceChanged"
         onchange=${this}>
+        <option value="">--Select desired nutrient--</option>
         ${
   this.state.nutrients.map(({number, name, unitName}) => {
     return `<option

@@ -32,6 +32,13 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 1. Avoid preselecting nutrient (or show value by default)
 1. Figure out why some nutrients were missing (still?)
+1. Explanations:
+	1. Select desired nutrient (instead of Nutrients)
+	1. Nutrient present in the following food items
+    1. Food sources for desired nutrient (instead of just Food)
+	1. Number of calories per serving
+1. Review preferences and comment out if not particularly needed now
+1. Publish npm release
 
 ## Possible to-dos
 
