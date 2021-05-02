@@ -47,6 +47,9 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 1. Links on food to food info page (like <https://food-nutrients.github.io/>
     but accepting a GET param to preselect) and ability to "add to cart", to
     add foods cumulatively to the other view
+    1. Add [Barcode Detection API](https://developer.mozilla.org/en-US/docs/Web/API/Barcode_Detection_API)
+        to <https://food-nutrients.github.io/> to read from image or webcam
+        snapshot to obtain value for food
 1. Could do guided tour like <https://food-nutrients.github.io/> on load
     using <https://github.com/shipshapecode/shepherd>.
 1. Publish npm release
