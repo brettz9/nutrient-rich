@@ -30,6 +30,11 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
+1. Idea for allowing user adding of symptoms for deficiencies and ability to
+    visit a particular symptom to see what other deficiencies have this
+    symptom (and what foods can remedy). Could also allow for generic
+    functions, e.g., "Builds cartilage", allowing one to see and be reminded
+    of multiple nutrients which meet the need
 1. Avoid preselecting nutrient (or show value by default)
 1. Figure out why some nutrients were missing (still?)
 1. Explanations:
