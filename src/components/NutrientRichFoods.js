@@ -1,9 +1,7 @@
 import HyperHTMLElement from '../../vendor/hyperhtml-element.js';
-import jQuery from '../../vendor/jquery.min.js';
-import dt from '../../vendor/jquery.dataTables.js';
 import {roundDigits} from '../utils.js';
 
-window.dt = dt(window, jQuery);
+import DT from '../../vendor/jquery.dataTables.js';
 
 const highClosenessMax = '999999999';
 
@@ -37,9 +35,13 @@ class NutrientRichFoods extends HyperHTMLElement {
   }
 
   /**
+   * @typedef {any} AnyValue
+   */
+
+  /**
    * @todo Shouldn't be defined by hyperHTMLElement? Also onconnected?
    * @param {string} ev
-   * @param {any} detail
+   * @param {AnyValue} detail
    * @returns {void}
    */
   dispatch (ev, detail) {
@@ -94,7 +96,8 @@ class NutrientRichFoods extends HyperHTMLElement {
     }
 
     const rows = this.state.foodInfo.map(({
-      fdcId: id, description: desc, foodNutrients
+      // fdcId: id,
+      description: desc, foodNutrients
     }) => {
       let nutrientAmount = 0;
       let nutrientAmountPerUnit = 0;
@@ -177,8 +180,8 @@ class NutrientRichFoods extends HyperHTMLElement {
       </table>
     `;
 
-    const table = tableContainer.querySelector('table');
-    jQuery(table).DataTable({
+    // eslint-disable-next-line no-new -- jQuery DataTables API
+    new DT('table', {
       destroy: true,
       columnDefs: [
         {className: 'dt-center', targets: [1, 3]}

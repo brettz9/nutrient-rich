@@ -118,10 +118,9 @@ class NutrientRichPreferences extends HyperHTMLElement {
   }
 
   /**
-   * @param {string} apiKey
    * @returns {void}
    */
-  refresh (apiKey) {
+  refresh (/* apiKey */) {
     /*
     if (!apiKey) {
       return;
@@ -201,11 +200,13 @@ class NutrientRichPreferences extends HyperHTMLElement {
 
     this.refresh(apiKey);
   }
-
+  /**
+   * @typedef {any} AnyValue
+   */
   /**
    * @todo Shouldn't be defined by hyperHTMLElement? Also onconnected?
    * @param {string} ev
-   * @param {any} detail
+   * @param {AnyValue} detail
    * @returns {void}
    */
   dispatch (ev, detail) {

@@ -1,4 +1,4 @@
-/* eslint-disable import/unambiguous -- Typedefs only */
+/* eslint-disable unicorn/no-empty-file, import/unambiguous -- Typedefs only */
 
 /**
  * `g`, etc.

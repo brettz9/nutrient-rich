@@ -5,7 +5,7 @@ module.exports = {
     browser: true
   },
   parserOptions: {
-    ecmaVersion: 2020
+    ecmaVersion: 2022
   },
   settings: {
     polyfills: [
@@ -18,7 +18,10 @@ module.exports = {
   },
   overrides: [{
     files: 'build/**',
-    extends: ['ash-nazg/sauron-node-script-overrides']
+    extends: ['ash-nazg/sauron-node-overrides'],
+    parserOptions: {
+      ecmaVersion: 2022
+    }
   }],
   extends: ['ash-nazg/sauron-overrides']
 };

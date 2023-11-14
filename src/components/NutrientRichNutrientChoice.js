@@ -19,6 +19,17 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
   }
 
   /**
+   * @returns {void}
+   */
+  created () {
+    setTimeout(() => {
+      this.nutrientChoiceChanged({
+        target: this.querySelector('.nutrient-choice')
+      });
+    });
+  }
+
+  /**
    * @param {{apiKey: ApiKey}} state
    * @returns {void}
    */
@@ -46,15 +57,15 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
       <b>Nutrients</b>
       <select
         required="required"
-        id="nutrient-choice"
+        class="nutrient-choice"
         data-call="nutrientChoiceChanged"
         onchange=${this}>
         <option value="">--Select desired nutrient--</option>
         ${
   this.state.nutrients.map(({number, name, unitName}) => {
     return `<option
-              data-chosenNutrientName="${name}"
-              data-chosenNutrientUnitName="${unitName}"
+              data-chosen-nutrient-name="${name}"
+              data-chosen-nutrient-unit-name="${unitName}"
               value="${number}"${
   number === this.state.selectedNutrient ? ' selected="selected"' : ''
 }>${`${name} (${unitName})`}</option>`;
@@ -71,10 +82,9 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
   nutrientChoiceChanged (e) {
     const option = e.target.selectedOptions[0];
 
-    const chosenNutrientName = option.getAttribute('data-chosenNutrientName');
-    const chosenNutrientUnitName = option.getAttribute(
-      'data-chosenNutrientUnitName'
-    );
+    const {
+      chosenNutrientName, chosenNutrientUnitName
+    } = option.dataset;
 
     this.setState({
       selectedNutrient: option.value
@@ -128,9 +138,12 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
     return nutrients;
   }
   /**
+   * @typedef {any} AnyValue
+   */
+  /**
    * @todo Shouldn't be defined by hyperHTMLElement? Also onconnected?
    * @param {string} ev
-   * @param {any} detail
+   * @param {AnyValue} detail
    * @returns {void}
    */
   dispatch (ev, detail) {

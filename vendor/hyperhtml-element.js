@@ -438,6 +438,7 @@ function dropChild() {
 
 /*! (c) 2018 Andrea Giammarchi (ISC) */
 
+
 const domdiff = (
   parentNode,     // where changes happen
   currentNodes,   // Array of current items/nodes
@@ -1158,6 +1159,7 @@ var VOID_ELEMENTS = /^(?:area|base|br|col|embed|hr|img|input|keygen|link|menuite
 
 /*! (c) Andrea Giammarchi - ISC */
 
+
 function sanitize (template) {
   return template.join(UIDC)
           .replace(selfClosing, fullClosing)
@@ -1619,6 +1621,8 @@ var Wire = (function (slice, proto) {
 }([].slice));
 
 // Node.CONSTANTS
+// 'cause some engine has no global Node defined
+// (i.e. Node, NativeScript, basicHTML ... )
 const DOCUMENT_FRAGMENT_NODE = 11;
 
 // SVG related constants
@@ -2208,6 +2212,7 @@ function hyper(HTML) {
 
 /*! (C) 2017-2018 Andrea Giammarchi - ISC Style License */
 
+
 // utils to deal with custom elements builtin extends
 const ATTRIBUTE_CHANGED_CALLBACK = 'attributeChangedCallback';
 const O = Object;
@@ -2215,12 +2220,17 @@ const classes = [];
 const defineProperty = O.defineProperty;
 const getOwnPropertyDescriptor = O.getOwnPropertyDescriptor;
 const getOwnPropertyNames = O.getOwnPropertyNames;
+/* istanbul ignore next */
 const getOwnPropertySymbols = O.getOwnPropertySymbols || (() => []);
+/* istanbul ignore next */
 const getPrototypeOf = O.getPrototypeOf || (o => o.__proto__);
+/* istanbul ignore next */
 const ownKeys = typeof Reflect === 'object' && Reflect.ownKeys ||
                 (o => getOwnPropertyNames(o).concat(getOwnPropertySymbols(o)));
+/* istanbul ignore next */
 const setPrototypeOf = O.setPrototypeOf ||
                       ((o, p) => (o.__proto__ = p, o));
+/* istanbul ignore stop */
 const camel = name => name.replace(/-([a-z])/g, ($0, $1) => $1.toUpperCase());
 const {attachShadow} = HTMLElement.prototype;
 const sr = new WeakMap;
@@ -2246,20 +2256,21 @@ class HyperHTMLElement extends HTMLElement {
     // while truthy values will be set as is.
     // Boolean attributes are also automatically observed.
     const booleanAttributes = Class.booleanAttributes || [];
-    booleanAttributes.forEach(name => {
+    booleanAttributes.forEach(attribute => {
+      const name = camel(attribute);
       if (!(name in proto)) defineProperty(
         proto,
-        camel(name),
+        name,
         {
           configurable: true,
           get() {
-            return this.hasAttribute(name);
+            return this.hasAttribute(attribute);
           },
           set(value) {
             if (!value || value === 'false')
-              this.removeAttribute(name);
+              this.removeAttribute(attribute);
             else
-              this.setAttribute(name, '');
+              this.setAttribute(attribute, '');
           }
         }
       );
@@ -2273,23 +2284,26 @@ class HyperHTMLElement extends HTMLElement {
     // will automatically do
     // el.setAttribute('observed', 123);
     // triggering also the attributeChangedCallback
-    const observedAttributes = Class.observedAttributes || [];
-    observedAttributes.forEach(name => {
+    const observedAttributes = (Class.observedAttributes || []).filter(
+      attribute => booleanAttributes.indexOf(attribute) < 0
+    );
+    observedAttributes.forEach(attribute => {
       // it is possible to redefine the behavior at any time
       // simply overwriting get prop() and set prop(value)
+      const name = camel(attribute);
       if (!(name in proto)) defineProperty(
         proto,
-        camel(name),
+        name,
         {
           configurable: true,
           get() {
-            return this.getAttribute(name);
+            return this.getAttribute(attribute);
           },
           set(value) {
             if (value == null)
-              this.removeAttribute(name);
+              this.removeAttribute(attribute);
             else
-              this.setAttribute(name, value);
+              this.setAttribute(attribute, value);
           }
         }
       );
@@ -2600,4 +2614,4 @@ function isReady(created, attributes, booleanAttributes) {
   return false;
 }
 
-export default HyperHTMLElement;
+export { HyperHTMLElement as default };

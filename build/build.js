@@ -1,10 +1,11 @@
-'use strict';
-
-const {readFile, writeFile} = require('fs').promises;
-const {join} = require('path');
+import {readFile, writeFile} from 'fs/promises';
+import {join, dirname} from 'path';
+import {fileURLToPath} from 'url';
 
 // eslint-disable-next-line no-shadow -- Polyglot
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * @param {string} name
@@ -38,7 +39,7 @@ async function saveNutrients (results) {
       if ((/^\d+:\d+$/u).test(name)) {
         return;
       }
-      if (!nutrientObjs.find(({number: num, name: nutrientName}) => {
+      if (!nutrientObjs.some(({number: num /* , name: nutrientName */}) => {
         return num === number;
       })) {
         nutrientObjs.push({
@@ -88,7 +89,7 @@ const {
   indent = 0,
 
   updateNutrientsOnly = false
-} = require('../config.json');
+} = JSON.parse(await readFile(join(__dirname, '../config.json')));
 
 const foodsFile = join(
   __dirname,
@@ -111,7 +112,6 @@ function getURL (pageNumber) {
   return url;
 }
 
-(async () => {
 if (updateNutrientsOnly) {
   await saveNutrients(
     JSON.parse(await readFile(foodsFile, 'utf8'))
@@ -119,38 +119,37 @@ if (updateNutrientsOnly) {
 
   // eslint-disable-next-line no-console -- CLI
   console.log('Saved nutrients file only!');
-  return;
+} else {
+  const pageNumbers = [];
+  const results = (await Promise.all(
+    [...Array.from({
+      length: maxPageNumber + 1
+    }).keys()].slice(1).map(async (pageNumber) => {
+      const req = await fetch(getURL(pageNumber));
+      const json = await req.json();
+      /*
+      // Use this approach if going to load incrementally
+      writeFile(
+        join(__dirname, `../data/foodSize${pageSize}-page${pageNumber}`),
+        JSON.stringify(json, null, 2)
+      );
+      return pageNumber;
+      */
+      pageNumbers.push(pageNumber);
+      return json;
+    })
+  )).flat();
+
+  // eslint-disable-next-line no-console -- CLI
+  console.log('pageNumbers', pageNumbers);
+
+  writeFile(
+    foodsFile,
+    JSON.stringify(results, null, indent)
+  );
+
+  await saveNutrients(results);
+
+  // eslint-disable-next-line no-console -- CLI
+  console.log('Complete!');
 }
-const pageNumbers = [];
-const results = (await Promise.all(
-  [...Array.from({
-    length: maxPageNumber + 1
-  }).keys()].slice(1).map(async (pageNumber) => {
-    const req = await fetch(getURL(pageNumber));
-    const json = await req.json();
-    /*
-    // Use this approach if going to load incrementally
-    writeFile(
-      join(__dirname, `../data/foodSize${pageSize}-page${pageNumber}`),
-      JSON.stringify(json, null, 2)
-    );
-    return pageNumber;
-    */
-    pageNumbers.push(pageNumber);
-    return json;
-  })
-)).flat();
-
-// eslint-disable-next-line no-console -- CLI
-console.log('pageNumbers', pageNumbers);
-
-writeFile(
-  foodsFile,
-  JSON.stringify(results, null, indent)
-);
-
-await saveNutrients(results);
-
-// eslint-disable-next-line no-console -- CLI
-console.log('Complete!');
-})();

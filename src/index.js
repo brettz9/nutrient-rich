@@ -20,11 +20,14 @@ if (!navigator.storage || !navigator.storage.persist) {
   return;
 }
 */
+
+// eslint-disable-next-line no-unused-expressions -- Ok
 HyperHTMLElement.bind($('body'))`
   <b>Requesting permissions...</b>
 `;
 // const persistent = await navigator.storage.persist();
 // if (persistent) {
+// eslint-disable-next-line no-unused-expressions -- Ok
 HyperHTMLElement.bind($('body'))`
   <nutrient-rich-app />
 `;

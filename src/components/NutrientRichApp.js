@@ -226,7 +226,7 @@ class NutrientRichApp extends HyperHTMLElement {
         <label>Amount of ingredient needed:
           <input
             required="required"
-            id="ingredient-needed"
+            class="ingredient-needed"
             data-call="ingredientNeededChanged"
             onchange=${this}
             value="${this.state.ingredientNeeded}">

@@ -14,19 +14,7 @@ export default [{
     resolve()
   ]
 }, {
-  // https://rollupjs.org/guide/en/#error-this-is-undefined
-  context: 'window',
-  input: 'node_modules/jquery/dist/jquery.min.js',
-  output: {
-    file: 'vendor/jquery.min.js',
-    format: 'es'
-  },
-  plugins: [
-    resolve(),
-    commonjs()
-  ]
-}, {
-  input: 'node_modules/datatables.net/js/jquery.dataTables.js',
+  input: 'node_modules/datatables.net/js/jquery.dataTables.mjs',
   output: {
     file: 'vendor/jquery.dataTables.js',
     format: 'es'
