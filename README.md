@@ -30,7 +30,6 @@ FoodData Central, 2019. [fdc.nal.usda.gov](https://fdc.nal.usda.gov/).
 
 ## To-dos
 
-1. Avoid preselecting nutrient (or show value by default)
 1. Figure out why some nutrients were missing (still?)
 1. Explanations:
 	1. Select desired nutrient (instead of Nutrients)
