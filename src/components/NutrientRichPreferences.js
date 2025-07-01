@@ -9,7 +9,7 @@ class NutrientRichPreferences extends HyperHTMLElement {
   constructor (apiKey) {
     super();
     this.apiKey = apiKey;
-    window.addEventListener('storage', () => {
+    globalThis.addEventListener('storage', () => {
       this.setState({
         cacheNutrients: JSON.parse(
           localStorage.getItem('NutrientRich-cache-nutrients') || 'true'

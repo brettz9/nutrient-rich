@@ -201,8 +201,8 @@ class NutrientRichApp extends HyperHTMLElement {
             data-call="hideZeroChanged"
             onclick=${this}
             ?checked=${
-  this.state.hideZeroAmountFoods
-}>
+              this.state.hideZeroAmountFoods
+            }>
           Hide zero-amount foods
         </label>
         <br><br>
@@ -212,14 +212,14 @@ class NutrientRichApp extends HyperHTMLElement {
             data-call="targetClosenessChanged"
             onchange=${this}>
             ${[
-    ['either', 'greater or less than'],
-    ['greater', 'greater than'],
-    ['less', 'less than']
-  ].map(([value, text]) => {
-    return `<option value="${value}"${
-      this.state.targetCloseness === value ? ' selected' : ''
-    }>${text}</option>`;
-  })}
+              ['either', 'greater or less than'],
+              ['greater', 'greater than'],
+              ['less', 'less than']
+            ].map(([value, text]) => {
+              return `<option value="${value}"${
+                this.state.targetCloseness === value ? ' selected' : ''
+              }>${text}</option>`;
+            })}
           </select> target
         </label>
         <br><br>
@@ -234,30 +234,30 @@ class NutrientRichApp extends HyperHTMLElement {
         <br><br>
 
         ${
-  // Make these conditional to avoid showing empty skeletons
-  // this.state.apiKey ?
-  this.nutrientChoiceComponent.update({
-    // apiKey: this.state.apiKey
-  })
-  // : ''
-}
+          // Make these conditional to avoid showing empty skeletons
+          // this.state.apiKey ?
+          this.nutrientChoiceComponent.update({
+            // apiKey: this.state.apiKey
+          })
+          // : ''
+        }
         <br><br>
         <nutrient-rich-preferences></nutrient-rich-preferences>
         <br><br><br>
       </section>
       <section>
         ${
-  // this.state.apiKey ?
-  this.foodsComponent.update({
-    // apiKey: this.state.apiKey,
-    chosenNutrientName: this.state.chosenNutrientName,
-    chosenNutrientUnitName: this.state.chosenNutrientUnitName,
-    totalNeeded: this.state.ingredientNeeded,
-    hideZeroAmountFoods: this.state.hideZeroAmountFoods,
-    targetCloseness: this.state.targetCloseness
-  })
-  // : */ ''
-}
+          // this.state.apiKey ?
+          this.foodsComponent.update({
+            // apiKey: this.state.apiKey,
+            chosenNutrientName: this.state.chosenNutrientName,
+            chosenNutrientUnitName: this.state.chosenNutrientUnitName,
+            totalNeeded: this.state.ingredientNeeded,
+            hideZeroAmountFoods: this.state.hideZeroAmountFoods,
+            targetCloseness: this.state.targetCloseness
+          })
+          // : */ ''
+        }
       </section>
     `;
   }

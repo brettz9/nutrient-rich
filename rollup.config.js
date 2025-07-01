@@ -14,9 +14,9 @@ export default [{
     resolve()
   ]
 }, {
-  input: 'node_modules/datatables.net/js/jquery.dataTables.mjs',
+  input: 'node_modules/datatables.net/js/dataTables.mjs',
   output: {
-    file: 'vendor/jquery.dataTables.js',
+    file: 'vendor/dataTables.dataTables.js',
     format: 'es'
   },
   plugins: [

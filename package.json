@@ -14,7 +14,7 @@
     "last 2 versions, not dead"
   ],
   "scripts": {
-    "copy": "cp ./node_modules/datatables.net-dt/css/jquery.dataTables.css ./vendor/jquery.dataTables.css && cp ./node_modules/datatables.net-dt/images/sort_asc.png images/sort_asc.png && cp ./node_modules/datatables.net-dt/images/sort_desc.png images/sort_desc.png && cp ./node_modules/datatables.net-dt/images/sort_both.png images/sort_both.png",
+    "copy": "cp ./node_modules/datatables.net-dt/css/dataTables.dataTables.css ./vendor/jquery.dataTables.css",
     "rollup": "rollup -c && npm run copy",
     "build-urls": "node build/build.js",
     "watch": "srr --port=8003",
@@ -37,35 +37,20 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "datatables.net": "^1.13.7",
-    "datatables.net-dt": "^1.13.7",
+    "datatables.net": "^2.3.2",
+    "datatables.net-dt": "^2.3.2",
     "hyperhtml": "^2.34.2",
     "hyperhtml-element": "^3.15.2"
   },
   "devDependencies": {
-    "@brettz9/eslint-plugin": "^1.0.4",
     "@brettz9/node-static": "^0.1.1",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "eslint": "^8.53.0",
-    "eslint-config-ash-nazg": "35.1.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-array-func": "^4.0.0",
-    "eslint-plugin-compat": "^4.2.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-html": "^7.1.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jsdoc": "^46.9.0",
-    "eslint-plugin-markdown": "^3.0.1",
-    "eslint-plugin-no-unsanitized": "^4.0.2",
-    "eslint-plugin-no-use-extend-native": "^0.5.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-sonarjs": "^0.23.0",
-    "eslint-plugin-unicorn": "^49.0.0",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "eslint": "^9.30.0",
+    "eslint-config-ash-nazg": "38.0.2",
     "node-fetch": "^3.3.2",
-    "open-cli": "^7.2.0",
-    "rollup": "^4.4.0",
+    "open-cli": "^8.0.0",
+    "rollup": "^4.44.1",
     "serve-reload-replace": "^4.0.3"
   }
 }

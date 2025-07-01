@@ -57,7 +57,7 @@ catch (WeakSet) {
 }
 var WeakSet$1 = self$2.WeakSet;
 
-const {indexOf: indexOf$1, slice: slice$1} = [];
+const {indexOf: indexOf$1} = [];
 
 const append = (get, parent, children, start, end, before) => {
   const isSelect = 'selectedIndex' in parent;

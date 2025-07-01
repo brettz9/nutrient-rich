@@ -67,8 +67,10 @@ class NutrientRichNutrientChoice extends HyperHTMLElement {
               data-chosen-nutrient-name="${name}"
               data-chosen-nutrient-unit-name="${unitName}"
               value="${number}"${
-  number === this.state.selectedNutrient ? ' selected="selected"' : ''
-}>${`${name} (${unitName})`}</option>`;
+                number === this.state.selectedNutrient
+                  ? ' selected="selected"'
+                  : ''
+              }>${`${name} (${unitName})`}</option>`;
   })}
       </select>
     </label>

@@ -1,7 +1,7 @@
 import HyperHTMLElement from '../../vendor/hyperhtml-element.js';
 import {roundDigits} from '../utils.js';
 
-import DT from '../../vendor/jquery.dataTables.js';
+import DT from '../../vendor/dataTables.dataTables.js';
 
 const highClosenessMax = '999999999';
 
